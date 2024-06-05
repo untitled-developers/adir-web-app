@@ -1,4 +1,7 @@
+import 'package:adir_web_app/utils/phone_field_controller.dart';
 import 'package:flutter/material.dart';
+
+part 'login_page_design_logic.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,6 +11,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late PhoneFieldController phoneNumberController = PhoneFieldController(
+    textController: TextEditingController(),
+  );
+  bool isCheckingPhoneNumber = false;
+  bool? validPhoneNumber;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Adir Web Application',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -25,43 +34,82 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                        // color: validPhoneNumber
-                        //     ? Theme.of(context).colorScheme.secondary
-                        //     : Colors.red,
-                        ),
+                      color:
+                          validPhoneNumber == null || validPhoneNumber == true
+                              ? Theme.of(context).colorScheme.secondary
+                              : Colors.red,
+                    ),
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(14),
+                                bottomLeft: Radius.circular(14)),
+                            color: Color.fromRGBO(120, 120, 120, 0.1)),
+                        width: 50,
+                        height: 60,
+                        child: const Center(child: Text('+961')),
+                      ),
                       Expanded(
                         child: TextField(
-                            //TODO Add controller here
-                            controller: TextEditingController(),
+                            controller: phoneNumberController.textController,
                             keyboardType: TextInputType.phone,
                             style: const TextStyle(color: Colors.black),
                             cursorHeight: 20,
                             cursorColor: Theme.of(context).primaryColor,
-                            decoration: const InputDecoration(
-                              counter: Offstage(),
-                              contentPadding: EdgeInsets.symmetric(
+                            onChanged: onMobileTextChange,
+                            onEditingComplete: onEditingComplete,
+                            decoration: InputDecoration(
+                              suffixIcon: isCheckingPhoneNumber
+                                  ? Transform.scale(
+                                      scale: 0.5,
+                                      child: const CircularProgressIndicator())
+                                  : validPhoneNumber == true
+                                      ? Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 10.0),
+                                          child: Image.asset(
+                                            'assets/icons/tick.png',
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                        )
+                                      : null,
+                              counter: const Offstage(),
+                              contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 5),
                               floatingLabelBehavior: FloatingLabelBehavior.auto,
-                              floatingLabelStyle:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
-                              labelStyle:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
+                              floatingLabelStyle: const TextStyle(
+                                  fontSize: 12, color: Colors.grey),
+                              labelStyle: const TextStyle(
+                                  fontSize: 12, color: Colors.grey),
                               labelText: 'Phone Number',
                               border: InputBorder.none,
                             )),
                       ),
                     ],
                   )),
+              validPhoneNumber == false
+                  ? const Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Text(
+                        'Invalid phone number.',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 10,
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
               const SizedBox(height: 30),
               SizedBox(
                 width: double.maxFinite,
@@ -75,8 +123,8 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
-                    onPressed: () {},
-                    child: Text(
+                    onPressed: onLogIn,
+                    child: const Text(
                       'Log in',
                       style: TextStyle(color: Colors.white),
                     ),
