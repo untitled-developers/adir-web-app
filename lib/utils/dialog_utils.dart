@@ -45,4 +45,59 @@ class DialogUtils {
           );
         },
       );
+
+  static Future<void> showErrorDialog(BuildContext context,
+          {Widget? title,
+          required Widget body,
+          Widget? actions,
+          Function? onOk}) async =>
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: title ??
+                const Text("Error", style: TextStyle(color: Colors.red)),
+            content: actions != null
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SingleChildScrollView(child: body),
+                      const SizedBox(height: 24),
+                      actions
+                    ],
+                  )
+                : SingleChildScrollView(child: body),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            actions: actions == null
+                ? <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12, right: 12),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints.tightFor(height: 37),
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                backgroundColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  side: const BorderSide(color: Colors.red),
+                                  borderRadius: BorderRadius.circular(30.0),
+                                )),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              if (onOk != null) {
+                                onOk();
+                              }
+                            },
+                            child: const Text('Ok',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w600))),
+                      ),
+                    ),
+                  ]
+                : null,
+          );
+        },
+      );
 }
