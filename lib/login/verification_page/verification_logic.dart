@@ -2,6 +2,17 @@ part of 'verification_page.dart';
 
 // ignore: library_private_types_in_public_api
 extension VerificationPageCode on _VerificationPageState {
+  validatePin(value) {
+    String validDigit = '1234';
+    //TODO valid digit here is static!!
+    if (value == validDigit) {
+      validPin = true;
+      setState(() {});
+      return null;
+    }
+    return 'Pin is incorrect';
+  }
+
   _verifySMSCode(String pin) {
     DialogUtils.showProgressDialog(context);
     Session()
@@ -13,7 +24,6 @@ extension VerificationPageCode on _VerificationPageState {
       sharedPreferences.remove('idForVerification');
       logger.i('accessToken: $token');
       Session().accessToken = token;
-
       Session().getLoggedInUser().then((user) async {
         //TODO Add the things related to firebase
         Provider.of<PrefsData>(context, listen: false).updateUser(user);

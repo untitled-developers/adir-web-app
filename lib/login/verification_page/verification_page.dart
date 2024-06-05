@@ -40,6 +40,7 @@ class _VerificationPageState extends State<VerificationPage> {
   late Duration myDuration;
   final TextEditingController _pinPutController = TextEditingController();
   bool finishedProfile = false;
+  bool validPin = false;
 
   @override
   void initState() {
@@ -74,7 +75,6 @@ class _VerificationPageState extends State<VerificationPage> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(4, 152, 153, 1),
         resizeToAvoidBottomInset: false,
         body: Center(
           child: SizedBox(
@@ -87,41 +87,24 @@ class _VerificationPageState extends State<VerificationPage> {
                 child: Container(
                   color: Colors.transparent,
                   child: Column(children: [
-                    Padding(
-                      padding: const EdgeInsets.all(50.0),
-                      child: Image.asset(
-                        'assets/images/logo.png',
-                      ),
-                    ),
                     SizedBox(height: screenHeight * 0.05),
                     const Text(
                       'Verification Code',
                       style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                     const SizedBox(height: 12),
                     Text(
                       'Code is sent to ${widget.phoneNumber}',
-                      style: TextStyle(
-                          fontSize: 16, color: Color.fromRGBO(221, 221, 63, 1)),
+                      style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 20),
-                    Pinput(
-                      defaultPinTheme: defaultPinTheme,
-                      focusedPinTheme: focusedPinTheme,
-                      submittedPinTheme: submittedPinTheme,
-                      controller: _pinPutController,
-                      // androidSmsAutofillMethod:
-                      //     AndroidSmsAutofillMethod.smsUserConsentApi,
-                      onSubmitted: (String pin) => _verifySMSCode(pin),
-                      onCompleted: (String pin) => _verifySMSCode(pin),
-                      pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-                    ),
+                    pinPutWidget(),
                     const SizedBox(height: 37),
                     const Text("Didn't receive the code?",
-                        style: TextStyle(fontSize: 16, color: Colors.white)),
+                        style: TextStyle(fontSize: 16)),
                     const SizedBox(height: 40),
                     if (hours == '00' && minutes == '00' && seconds == '00')
                       TextButton(
@@ -142,15 +125,13 @@ class _VerificationPageState extends State<VerificationPage> {
                         children: [
                           const Text(
                             'Try again in',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(fontSize: 16),
                           ),
                           const SizedBox(width: 7),
                           Text(
                             '$hours:$minutes:$seconds',
                             style: const TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 16,
-                                color: Colors.white),
+                                fontWeight: FontWeight.w800, fontSize: 16),
                           ),
                         ],
                       ),
@@ -158,7 +139,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     SizedBox(
                       width: screenWidth * 0.55,
                       child: ConstrainedBox(
-                        constraints: BoxConstraints.tightFor(height: 42),
+                        constraints: const BoxConstraints.tightFor(height: 42),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
@@ -168,36 +149,25 @@ class _VerificationPageState extends State<VerificationPage> {
                               borderRadius: BorderRadius.circular(14),
                             ),
                           ),
-                          onPressed: () => _verifySMSCode(widget.phoneNumber),
-                          child: Text(
+                          onPressed: () => validPin
+                              ? _verifySMSCode(widget.phoneNumber)
+                              : {},
+                          child: const Text(
                             'Submit',
-                            style: TextStyle(
-                                color: Theme.of(context).primaryColor),
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
                     ),
-
-                    // teliaButton(
-                    //     widget: const Text(
-                    //       'Submit',
-                    //       style: TextStyle(
-                    //           fontSize: 16,
-                    //           fontWeight: FontWeight.w800,
-                    //           color: Colors.white),
-                    //     ),
-                    //     width: screenWidth * 0.55,
-                    //     onPressed: () => _verifySMSCode(widget.phoneNumber)),
                     const SizedBox(height: 40),
                     TextButton(
                       onPressed: _changePhoneNumber,
-                      child: Text(
+                      child: const Text(
                         'Change phone number',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             fontWeight: FontWeight.w800,
-                            fontSize: 16,
-                            color: Color.fromRGBO(221, 221, 63, 1)),
+                            fontSize: 16),
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.1),
