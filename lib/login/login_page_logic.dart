@@ -2,6 +2,8 @@ part of 'login_page.dart';
 
 extension LoginPageLogic on _LoginPageState {
   Future<String> getDevice() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+
     if (kIsWeb) {
       final userAgent = window.navigator.userAgent.toLowerCase();
       if (userAgent.contains('android')) {
@@ -9,10 +11,10 @@ extension LoginPageLogic on _LoginPageState {
       } else if (userAgent.contains('iphone') || userAgent.contains('ipad')) {
         return 'iOS Device';
       } else {
-        return 'Unknown Web Device';
+        WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
+        return webBrowserInfo.browserName.name.toString();
       }
     } else {
-      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       if (io.Platform.isAndroid) {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
         return androidInfo.model ?? 'Unknown Android Model';
