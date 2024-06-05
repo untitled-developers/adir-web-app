@@ -20,12 +20,16 @@ class DataHolder {
 //TODO Check if this's needed
 class ApplicationPreferences {
   bool isDarkMode;
+
   ApplicationPreferences({this.isDarkMode = false});
 }
 
 class PrefsData extends ChangeNotifier {
   late final UserHolder _userHolder;
+
+  //TODO Check if this's needed
   late final DataHolder _dataHolder;
+  Map<String, dynamic> _questions = {};
 
   User? get user => _userHolder.user;
 
@@ -33,10 +37,17 @@ class PrefsData extends ChangeNotifier {
 
   ApplicationPreferences get applicationPreferences => _applicationPreferences;
 
+  Map<String, dynamic> get questions => _questions;
+
   PrefsData(this._userHolder, this._applicationPreferences, this._dataHolder);
 
   void updateUser(User? user) {
     _userHolder.user = user;
+    notifyListeners();
+  }
+
+  void updateQuestions(Map<String, dynamic> newQuestions) {
+    _questions = newQuestions;
     notifyListeners();
   }
 

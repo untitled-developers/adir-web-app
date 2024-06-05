@@ -1,16 +1,14 @@
 import 'dart:io' as io;
 
-import 'package:adir_web_app/api/session.dart';
+import 'package:adir_web_app/common/questions.dart';
 import 'package:adir_web_app/common/slide_route.dart';
 import 'package:adir_web_app/login/verification_page/verification_page.dart';
-import 'package:adir_web_app/main.dart';
-import 'package:adir_web_app/utils/dialog_utils.dart';
 import 'package:adir_web_app/utils/phone_field_controller.dart';
+import 'package:adir_web_app/utils/prefs_data.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import 'package:universal_html/html.dart';
 
 part 'login_page_design_logic.dart';
