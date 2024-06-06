@@ -150,7 +150,7 @@ class _VerificationPageState extends State<VerificationPage> {
                             ),
                           ),
                           onPressed: () => validPin
-                              ? _verifySMSCode(widget.phoneNumber)
+                              ? _verifySMSCode(_pinPutController.text)
                               : {},
                           child: const Text(
                             'Submit',

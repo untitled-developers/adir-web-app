@@ -3,7 +3,7 @@ import 'package:adir_web_app/api/session.dart';
 import 'package:adir_web_app/main.dart';
 import 'package:dio/dio.dart';
 
-const domainUrl = ""; //TODO Add domain URL here
+const domainUrl = "http://192.168.1.108:8000"; //TODO Add domain URL here
 
 const baseUrl = "$domainUrl/api";
 
@@ -103,8 +103,8 @@ class LoginApiClient {
       Response response = await _dio!.request(
         "/login",
         data: {
-          'verificationCode': verificationCode,
-          'verificationId': verificationId
+          'verification_code': verificationCode,
+          'verification_id': verificationId
         },
         options: Options(
           method: "POST",

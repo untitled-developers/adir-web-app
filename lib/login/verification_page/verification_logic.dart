@@ -3,9 +3,8 @@ part of 'verification_page.dart';
 // ignore: library_private_types_in_public_api
 extension VerificationPageCode on _VerificationPageState {
   validatePin(value) {
-    String validDigit = '1234';
-    //TODO valid digit here is static!!
-    if (value == validDigit) {
+    String validDigit = widget.phoneVerification['verification_code'];
+    if (value.toString() == validDigit) {
       validPin = true;
       setState(() {});
       return null;
