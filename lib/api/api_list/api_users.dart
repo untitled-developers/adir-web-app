@@ -18,19 +18,13 @@ class UsersAPI {
     }
   }
 
-  Future<User> createUser(
-    String? phoneNumber,
-    String? pass,
+  Future<User> updateUserInfo(
+    Map<String, dynamic> data,
   ) async {
-    Map<String, dynamic> data = {
-      'phone': phoneNumber,
-      'password': pass,
-    };
-
     FormData formData = FormData.fromMap(data);
     try {
       Response response = await _dio.request(
-        "/user/create",
+        "/user/update",
         data: formData,
         options: Options(
           method: "POST",

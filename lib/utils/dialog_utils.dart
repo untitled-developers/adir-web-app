@@ -11,7 +11,12 @@ class DialogUtils {
       useRootNavigator: true,
       barrierColor: Colors.white70,
       builder: (BuildContext context) {
-        return const Center(child: Icon(Icons.download_for_offline));
+        return SizedBox(
+          width: 20,
+          height: 20,
+          child: Transform.scale(
+              scale: 0.1, child: const CircularProgressIndicator()),
+        );
       },
     );
   }

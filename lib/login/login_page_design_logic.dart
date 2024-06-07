@@ -3,9 +3,6 @@ part of 'login_page.dart';
 extension LoginPageDesignLogic on _LoginPageState {
   onLogIn() async {
     if (validPhoneNumber == true) {
-      //TODO remove this:
-      Provider.of<PrefsData>(context, listen: false).updateQuestions(questions);
-
       String device = await getDevice();
       //TODO uncomment this when api's ready
       Session()

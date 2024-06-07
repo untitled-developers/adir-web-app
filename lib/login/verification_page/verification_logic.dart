@@ -36,7 +36,8 @@ extension VerificationPageCode on _VerificationPageState {
             storage.write(key: 'accessToken', value: token);
           }
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(
+                  builder: (context) => const UserInformationPage()),
               (Route<dynamic> route) => false);
         }
       }).catchError((error, stack) async {

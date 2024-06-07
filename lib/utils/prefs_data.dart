@@ -1,3 +1,4 @@
+import 'package:adir_web_app/common/questions.dart';
 import 'package:adir_web_app/models/user.dart';
 import 'package:flutter/foundation.dart';
 
@@ -29,7 +30,7 @@ class PrefsData extends ChangeNotifier {
 
   //TODO Check if this's needed
   late final DataHolder _dataHolder;
-  Map<String, dynamic> _questions = {};
+  Map<String, dynamic> _questions = staticQuestions;
 
   User? get user => _userHolder.user;
 

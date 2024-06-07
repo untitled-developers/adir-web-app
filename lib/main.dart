@@ -102,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
     String? password = await storage.read(key: 'password');
 
     if (token == null) {
+      //TODO Change page
       if (mounted) {
         Navigator.of(context).pushAndRemoveUntil(
           SlideRoute(
@@ -124,6 +125,8 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         }
       } catch (e) {
+        //TODO Change page
+
         logger.e(e);
         Session().accessToken = null;
         if (mounted) {

@@ -1,4 +1,4 @@
-Map<String, dynamic> questions = {
+Map<String, dynamic> staticQuestions = {
   'question1': {
     'languages': {'EN': "Title", 'FR': 'Titre', 'AR': 'لقب'},
     'value': ['Mr.', 'Mrs.', 'Miss', 'Ms.'],
