@@ -19,4 +19,18 @@ extension UserInformationLogic on _UserInformationPageState {
     }
     setState(() {});
   }
+
+  bool isFormComplete() =>
+      selectedTitle != null &&
+      firstNameController.text.isNotEmpty &&
+      fatherNameController.text.isNotEmpty &&
+      familyNameController.text.isNotEmpty &&
+      maidenNameController.text.isNotEmpty &&
+      nationalityController.text.isNotEmpty &&
+      emailController.text.isNotEmpty &&
+      occupationController.text.isNotEmpty &&
+      dateOfBirth != null &&
+      dateOfBirth!.isNotEmpty &&
+      placeOfBirthController.text.isNotEmpty &&
+      phoneNumberController.textController.text.isNotEmpty;
 }

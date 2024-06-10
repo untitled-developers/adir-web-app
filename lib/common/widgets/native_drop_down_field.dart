@@ -5,6 +5,7 @@ Widget dropDownField(
     required dynamic selectedItem,
     required Function(dynamic) onChanged,
     bool? valid,
+    bool? enabled,
     double? radius,
     String? errorText}) {
   return Material(

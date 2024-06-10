@@ -6,6 +6,7 @@ Widget textField(
     String? errorMessage,
     TextInputType? inputType,
     Widget? suffixIcon,
+    bool? enabled,
     bool? isValid}) {
   return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
@@ -23,6 +24,7 @@ Widget textField(
           return null;
         }
       },
+      enabled: enabled ?? true,
       controller: controller,
       keyboardType: inputType ?? TextInputType.text,
       decoration: InputDecoration(
