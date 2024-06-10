@@ -74,6 +74,7 @@ class _UserInformationPageState extends State<UserInformationPage> {
                     width: 99,
                     child: dropDownField(
                         list: titlesList,
+                        selectedItem: selectedTitle,
                         onChanged: (title) =>
                             setState(() => selectedTitle = title)),
                   )

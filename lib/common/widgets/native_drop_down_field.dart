@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget dropDownField(
     {required List<dynamic> list,
+    required dynamic selectedItem,
     required Function(dynamic) onChanged,
     bool? valid,
     double? radius,
@@ -22,6 +23,7 @@ Widget dropDownField(
         child: Padding(
             padding: const EdgeInsets.only(left: 12),
             child: DropdownButtonFormField<dynamic>(
+              value: selectedItem,
               decoration: const InputDecoration(border: InputBorder.none),
               items: list.map<DropdownMenuItem<dynamic>>((dynamic value) {
                 return DropdownMenuItem<dynamic>(

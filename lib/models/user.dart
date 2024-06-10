@@ -16,14 +16,14 @@ class User {
 
   User.fromMap(Map<String, dynamic> model) {
     id = model['id'];
-    firstName = model['title'] ?? '';
+    title = model['title'] ?? '';
     firstName = model['first_name'] ?? '';
     fatherName = model['father_name'] ?? '';
     maidenName = model['maiden_name'] ?? '';
     familyName = model['family_name'] ?? '';
     nationality = model['nationality'] ?? '';
-    nationality = model['email'] ?? '';
-    nationality = model['occupation'] ?? '';
+    email = model['email'] ?? '';
+    occupation = model['occupation'] ?? '';
     dateOfBirth = model['date_of_birth'] != null
         ? DateTime.parse(DateFormat('yyyy-MM-dd')
             .format(DateTime.parse(model['date_of_birth'])))

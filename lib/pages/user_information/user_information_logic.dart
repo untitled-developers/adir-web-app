@@ -12,7 +12,8 @@ extension UserInformationLogic on _UserInformationPageState {
       nationalityController.text = user!.nationality ?? '';
       emailController.text = user!.email ?? '';
       occupationController.text = user!.occupation ?? '';
-      dateOfBirth = dateOfBirth != null ? user!.dateOfBirth.toString() : '';
+      dateOfBirth =
+          user!.dateOfBirth != null ? user!.dateOfBirth.toString() : '';
       placeOfBirthController.text = user!.placeOfBirth ?? '';
       phoneNumberController.textController.text = user!.applicantPhone ?? '';
     }
