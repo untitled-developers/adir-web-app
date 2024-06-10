@@ -57,7 +57,6 @@ extension UserInformationPageDesignLogic on _UserInformationPageState {
         DialogUtils.showNotifyDialog(context, body: Text('Done'));
       }).catchError((error, stack) {
         logger.e('Error', error: error, stackTrace: stack);
-
         if (mounted) {
           if (error is DioException && error.response != null) {
             DialogUtils.showErrorDialog(

@@ -8,6 +8,9 @@ Widget dropDownField(
     bool? enabled,
     double? radius,
     String? errorText}) {
+  if (selectedItem != null && !list.contains(selectedItem)) {
+    selectedItem = null;
+  }
   return Material(
     color: Colors.transparent,
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

@@ -17,6 +17,8 @@ extension UserInformationLogic on _UserInformationPageState {
       placeOfBirthController.text = user!.placeOfBirth ?? '';
       phoneNumberController.textController.text = user!.applicantPhone ?? '';
     }
+    isFormComplete() ? isEditing = false : true;
+
     setState(() {});
   }
 

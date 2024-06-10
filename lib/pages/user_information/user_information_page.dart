@@ -319,9 +319,22 @@ class _UserInformationPageState extends State<UserInformationPage> {
                 const SizedBox(height: 50),
                 isEditing
                     ? Center(
-                        child: ElevatedButton(
+                        child: TextButton(
                             onPressed: onEditInfo, child: Text('Submit')))
-                    : SizedBox()
+                    : isFormComplete()
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                  onPressed: () {},
+                                  child: const Text(
+                                    'Proceed to my application',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  )),
+                            ],
+                          )
+                        : SizedBox()
               ],
             ),
           ),
