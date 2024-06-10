@@ -1,77 +1,53 @@
 Map<String, dynamic> staticQuestions = {
-  'question1': {
-    'languages': {'EN': "Title", 'FR': 'Titre', 'AR': 'لقب'},
-    'value': ['Mr.', 'Mrs.', 'Miss', 'Ms.'],
+  'natureofvehicle': {
+    'languages': {'EN': "Nature of vehicle", 'FR': '', 'AR': ''},
+    'value': [
+      'Private Car',
+      'Convertible Soft Top',
+      'Truck',
+      'Motorcycle',
+      'Van'
+    ],
     'answer': ''
   },
-  'question2': {
-    'languages': {'EN': "First name", 'FR': 'Prénom', 'AR': 'الاسم الأول'},
-    'value':
-        'string', //if the value is null, we should put the type of the answer to be sent
+  'neworrenewal': {
+    'languages': {'EN': "New or Renewal", 'FR': '', 'AR': ''},
+    'value': 'bool',
     'answer': ''
   },
-  'question3': {
-    'languages': {
-      'EN': "Maiden name",
-      'FR': 'Nom de famille avant le mariage',
-      'AR': 'اسم العائلة قبل الزواج'
-    },
-    'value': 'string',
+  'sportscar': {
+    'languages': {'EN': "New or Renewal", 'FR': '', 'AR': ''},
+    'value': 'bool',
     'answer': ''
   },
-  'question4': {
-    'languages': {
-      'EN': "Family name",
-      'FR': 'Nom de famille',
-      'AR': 'اسم العائلة'
-    },
-    'value': 'string',
+  'carmarketvalue': {
+    'languages': {'EN': "Car Market Value", 'FR': '', 'AR': ''},
+    'value': 'double',
     'answer': ''
   },
-  'question5': {
-    'languages': {
-      'EN': "Date of birth",
-      'FR': 'Date de naissance',
-      'AR': 'تاريخ الميلاد'
-    },
-    'value': 'datetime',
+  'yearofmake': {
+    'languages': {'EN': "Year of Make", 'FR': '', 'AR': ''},
+    'value': 'int',
     'answer': ''
   },
-  'question6': {
-    'languages': {
-      'EN': "Place of birth",
-      'FR': 'Lieu de naissance',
-      'AR': 'مكان الميلاد'
-    },
-    'value': 'string',
+  'deductible': {
+    'languages': {'EN': "Deductible", 'FR': '', 'AR': ''},
+    'value': ['0 USD', '100 USD', 'other'],
     'answer': ''
   },
-  'question7': {
-    'languages': {'EN': "Nationality", 'FR': 'Nationalité', 'AR': 'الجنسية'},
-    'value': 'string',
+  'insurancetype': {
+    'languages': {'EN': "Insurance Type", 'FR': '', 'AR': ''},
+    'value': ['All Risks + (MPF)', 'All Risks (MRF)', 'other'],
     'answer': ''
   },
-  'question8': {
-    'languages': {'EN': "Occupation", 'FR': 'Profession', 'AR': 'الوظيفة'},
-    'value': 'string',
+  'vehicleagencyrepair': {
+    'languages': {'EN': "Vehicle Agency Repair", 'FR': '', 'AR': ''},
+    'value': 'bool',
     'answer': ''
   },
-  'question9': {
-    'languages': {
-      'EN': "Phone (Mobile)",
-      'FR': 'Téléphone portable',
-      'AR': 'الهاتف المحمول'
-    },
-    'value': 'string', //make sure to add +961
-    'answer': ''
-  },
-  'question10': {
-    'languages': {
-      'EN': "E-mail Address",
-      'FR': 'Adresse e-mail',
-      'AR': 'البريد الإلكتروني'
-    },
-    'value': 'string', //make sure to add +961
+  'replacementcar': {
+    'languages': {'EN': "Replacement Car", 'FR': '', 'AR': ''},
+    'value': 'bool',
     'answer': ''
   },
 };

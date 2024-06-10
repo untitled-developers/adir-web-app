@@ -4,6 +4,7 @@ import 'package:adir_web_app/common/widgets/native_drop_down_field.dart';
 import 'package:adir_web_app/common/widgets/textField.dart';
 import 'package:adir_web_app/main.dart';
 import 'package:adir_web_app/models/user.dart';
+import 'package:adir_web_app/pages/questions_page/questions_page.dart';
 import 'package:adir_web_app/utils/dialog_utils.dart';
 import 'package:adir_web_app/utils/phone_field_controller.dart';
 import 'package:adir_web_app/utils/prefs_data.dart';
@@ -326,7 +327,7 @@ class _UserInformationPageState extends State<UserInformationPage> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton(
-                                  onPressed: () {},
+                                  onPressed: onProceed,
                                   child: const Text(
                                     'Proceed to my application',
                                     style:

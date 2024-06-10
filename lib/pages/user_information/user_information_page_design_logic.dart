@@ -75,4 +75,5 @@ extension UserInformationPageDesignLogic on _UserInformationPageState {
       });
     }
   }
+  onProceed ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> QuestionsPage()));
 }
