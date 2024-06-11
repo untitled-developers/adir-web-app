@@ -20,6 +20,9 @@ class _QuestionsPageState extends State<QuestionsPage> {
   TextEditingController currentController = TextEditingController();
   Map<String, dynamic>? allQuestions;
   String? chosenYearOfMake = '2024';
+  int indexOfCardBrand = 0;
+  int indexOfVehicleAgency = 0;
+  int indexReplacementCar = 0;
   var currentQuestionKey;
   var currentQuestion;
   @override
@@ -32,6 +35,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
   Widget build(BuildContext context) {
     currentQuestionKey = keys?[currentIndex] ?? '';
     currentQuestion = allQuestions?[currentQuestionKey] ?? '';
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Description of the Risk'),
