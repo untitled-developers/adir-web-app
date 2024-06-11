@@ -3,7 +3,7 @@ import 'package:adir_web_app/api/session.dart';
 import 'package:adir_web_app/main.dart';
 import 'package:dio/dio.dart';
 
-const domainUrl = "http://192.168.1.103:8000";
+const domainUrl = "http://192.168.1.110:8000";
 
 const baseUrl = "$domainUrl/api";
 

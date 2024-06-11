@@ -52,6 +52,11 @@ class PrefsData extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateAnswer(String key, dynamic answer) {
+    _questions[key]['answer'] = answer;
+    notifyListeners();
+  }
+
   void updateApplicationPreferences({required bool isDarkMode}) {
     _applicationPreferences.isDarkMode = isDarkMode
         ? _applicationPreferences.isDarkMode

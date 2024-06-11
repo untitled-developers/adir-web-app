@@ -20,6 +20,17 @@ Map<String, dynamic> staticQuestions = {
     'value': 'bool',
     'answer': ''
   },
+  'carbrand': {
+    'languages': {'EN': "Car Brand", 'FR': '', 'AR': ''},
+    'value': [
+      'Mercedes',
+      'Honda',
+      'Porsche',
+      'Land Rover',
+      'Other',
+    ],
+    'answer': ''
+  },
   'carmarketvalue': {
     'languages': {'EN': "Car Market Value", 'FR': '', 'AR': ''},
     'value': 'double',

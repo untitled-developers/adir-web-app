@@ -17,8 +17,11 @@ class _QuestionsPageState extends State<QuestionsPage> {
   int currentIndex = 0;
   bool isLoading = true;
   List<String>? keys;
+  TextEditingController currentController = TextEditingController();
   Map<String, dynamic>? allQuestions;
-
+  String? chosenYearOfMake = '2024';
+  var currentQuestionKey;
+  var currentQuestion;
   @override
   void initState() {
     super.initState();
@@ -27,9 +30,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var currentQuestionKey = keys?[currentIndex] ?? '';
-    var currentQuestion = allQuestions?[currentQuestionKey] ?? '';
-
+    currentQuestionKey = keys?[currentIndex] ?? '';
+    currentQuestion = allQuestions?[currentQuestionKey] ?? '';
     return Scaffold(
       appBar: AppBar(
         title: const Text('Description of the Risk'),
@@ -47,7 +49,11 @@ class _QuestionsPageState extends State<QuestionsPage> {
                     style: const TextStyle(fontSize: 24),
                   ),
                   const SizedBox(height: 20),
-                  questionContentWidget(currentQuestion, setState),
+                  //TODO This must be using conditions
+                  questionContentWidget(context, currentQuestion, setState,
+                      controller: currentController,
+                      chosenYear: chosenYearOfMake,
+                      callCalendarBack: yearOfMakeCallBack),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,

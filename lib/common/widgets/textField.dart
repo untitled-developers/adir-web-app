@@ -7,6 +7,8 @@ Widget textField(
     TextInputType? inputType,
     Widget? suffixIcon,
     bool? enabled,
+    Function(String)? onChanged,
+    bool? shouldValidate,
     bool? isValid}) {
   return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
@@ -16,7 +18,7 @@ Widget textField(
           ? AutovalidateMode.always
           : AutovalidateMode.onUserInteraction,
       validator: (value) {
-        if (value == null || value.isEmpty) {
+        if (value == null || value.isEmpty && isValid == false) {
           return "Can't be empty";
         } else if (errorMessage != null) {
           return errorMessage;

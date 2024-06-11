@@ -9,12 +9,14 @@ Widget datePicker(
     required Function callCalendarBack,
     Function? rangeCallBack,
     bool? valid,
+    CalendarDatePicker2Mode? calendarViewMode,
     DateTime? lastDate,
     calendarType}) {
   return GestureDetector(
     onTap: () => showCalendarDialog(context, callCalendarBack, calendarType,
         rangeCallBack: rangeCallBack,
         chosenDate: chosenDate,
+        calendarViewMode: calendarViewMode,
         lastDate: lastDate),
     child: Container(
       height: 60,
@@ -71,7 +73,8 @@ showCalendarDialog(
     {String? selectedDateRange,
     Function? rangeCallBack,
     String? chosenDate,
-    DateTime? lastDate}) async {
+    DateTime? lastDate,
+    CalendarDatePicker2Mode? calendarViewMode}) async {
   return showGeneralDialog(
       barrierColor: const Color.fromRGBO(20, 20, 20, 0.2),
       context: context,
@@ -95,6 +98,7 @@ showCalendarDialog(
                         callCalendarBack,
                         lastDate: lastDate,
                         rangeCallBack: rangeCallBack,
+                        calendarViewMode: calendarViewMode,
                         chosenDate == null
                             ? [
                                 DateTime.now()
@@ -113,7 +117,8 @@ showCalendarDialog(
                         CalendarDatePicker2Type.single,
                         callCalendarBack,
                         _singleDatePickerValueWithDefaultValue,
-                        lastDate: lastDate)),
+                        lastDate: lastDate,
+                        calendarViewMode: calendarViewMode)),
           ),
         );
       });
@@ -121,9 +126,14 @@ showCalendarDialog(
 
 Widget _buildCalendarWithActionButtons(BuildContext context, calendarType,
     Function callCalendarBack, List<DateTime?> dateList,
-    {String? selectedDateRange, Function? rangeCallBack, DateTime? lastDate}) {
+    {String? selectedDateRange,
+    Function? rangeCallBack,
+    DateTime? lastDate,
+    CalendarDatePicker2Mode? calendarViewMode}) {
   final config = CalendarDatePicker2WithActionButtonsConfig(
     calendarType: calendarType,
+    disableMonthPicker: calendarViewMode != null,
+    calendarViewMode: calendarViewMode,
     gapBetweenCalendarAndButtons: 10,
     selectedDayTextStyle: const TextStyle(
         fontWeight: FontWeight.w700, fontSize: 15, color: Colors.white),
@@ -176,7 +186,6 @@ Widget _buildCalendarWithActionButtons(BuildContext context, calendarType,
                     if (rangeCallBack != null) rangeCallBack();
                   }
                 });
-
                 callCalendarBack(
                   _getValueText(
                     config.calendarType,
