@@ -56,6 +56,7 @@ Widget questionContentWidget(BuildContext context,
         onChanged: (value) {
           setState(() {
             question['answer'] = double.tryParse(value) ?? '';
+            print('testtt here ${question['answer'].toString()}');
           });
         },
         inputType: TextInputType.number);
@@ -82,7 +83,6 @@ Widget questionContentWidget(BuildContext context,
                     selectedDate: DateTime.now(),
                     onChanged: (DateTime dateTime) {
                       question['answer'] = dateTime.year.toString();
-                      print('testtt ${question['answer'].toString()}');
                       Navigator.pop(context, dateTime.year);
                     },
                   ),

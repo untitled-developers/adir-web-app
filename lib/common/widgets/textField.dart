@@ -26,6 +26,7 @@ Widget textField(
           return null;
         }
       },
+      onChanged: onChanged,
       enabled: enabled ?? true,
       controller: controller,
       keyboardType: inputType ?? TextInputType.text,
