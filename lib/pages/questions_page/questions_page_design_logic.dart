@@ -18,6 +18,7 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
   }
 
   void _previousQuestion() {
+    setState(() => enableSelection = true);
     setState(() {
       if (currentIndex > 0) {
         currentIndex--;

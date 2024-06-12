@@ -50,19 +50,16 @@ extension QuestionsPageLogic on _QuestionsPageState {
       var answer = Provider.of<PrefsData>(context, listen: false)
               .questions['insurancetype']['answer'] ??
           '';
-      switch (answer) {
-        case 'All Risks (MRF)':
-          if (isVanOrMotorcycle) {
-            keys!.removeWhere((element) => element == 'vehicleagencyrepair');
-            Provider.of<PrefsData>(context, listen: false)
-                .updateAnswer('vehicleagencyrepair', '');
-            if (!keys!.contains('replacementcar')) {
-              keys!.insert(indexOfVehicleAgency, 'replacementcar');
-            }
-            Provider.of<PrefsData>(context, listen: false)
-                .updateAnswer('replacementcar', 'No');
-            setState(() => enableSelection = false);
-          }
+      if (isVanOrMotorcycle && answer == 'All Risks (MRF)') {
+        keys!.removeWhere((element) => element == 'vehicleagencyrepair');
+        Provider.of<PrefsData>(context, listen: false)
+            .updateAnswer('vehicleagencyrepair', '');
+        if (!keys!.contains('replacementcar')) {
+          keys!.insert(indexOfVehicleAgency, 'replacementcar');
+        }
+        Provider.of<PrefsData>(context, listen: false)
+            .updateAnswer('replacementcar', 'No');
+        setState(() => enableSelection = false);
       }
 
       // if (answer == 'All Risks + (MPF)') {
