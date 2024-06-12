@@ -33,7 +33,7 @@ Widget questionContentWidget(BuildContext context,
   } else if (question['value'] == 'bool') {
     return Row(
       children: [
-        Text('No'),
+        const Text('No'),
         Container(
           width: 120,
           child: SwitchListTile(
@@ -45,7 +45,7 @@ Widget questionContentWidget(BuildContext context,
             },
           ),
         ),
-        Text('Yes'),
+        const Text('Yes'),
       ],
     );
   } else if (question['value'] == 'double') {
@@ -63,7 +63,7 @@ Widget questionContentWidget(BuildContext context,
     return TextField(
         controller: controller,
         readOnly: true,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Select Year',
           border: OutlineInputBorder(),
         ),
@@ -72,7 +72,7 @@ Widget questionContentWidget(BuildContext context,
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text('Select Year'),
+                title: const Text('Select Year'),
                 content: Container(
                   height: 300,
                   width: 300,
@@ -81,6 +81,8 @@ Widget questionContentWidget(BuildContext context,
                     lastDate: DateTime(DateTime.now().year),
                     selectedDate: DateTime.now(),
                     onChanged: (DateTime dateTime) {
+                      question['answer'] = dateTime.year.toString();
+                      print('testtt ${question['answer'].toString()}');
                       Navigator.pop(context, dateTime.year);
                     },
                   ),

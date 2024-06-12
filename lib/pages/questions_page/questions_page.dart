@@ -1,3 +1,4 @@
+import 'package:adir_web_app/pages/questions_page/done_page.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/question_content_widget.dart';
 import 'package:adir_web_app/utils/prefs_data.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,9 @@ class _QuestionsPageState extends State<QuestionsPage> {
   int indexOfVehicleAgency = 0;
   int indexReplacementCar = 0;
   bool isVanOrMotorcycle = false;
+  bool isPrivateCarOrConvertible = false;
   bool enableSelection = true;
+  int yearOfMakeGap = 0;
   String natureOfVehicleAnswer = '';
   var currentQuestionKey;
   var currentQuestion;
