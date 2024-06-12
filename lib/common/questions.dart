@@ -10,16 +10,6 @@ Map<String, dynamic> staticQuestions = {
     ],
     'answer': ''
   },
-  'neworrenewal': {
-    'languages': {'EN': "New or Renewal", 'FR': '', 'AR': ''},
-    'value': 'bool',
-    'answer': ''
-  },
-  'sportscar': {
-    'languages': {'EN': "New or Renewal", 'FR': '', 'AR': ''},
-    'value': 'bool',
-    'answer': ''
-  },
   'carbrand': {
     'languages': {'EN': "Car Brand", 'FR': '', 'AR': ''},
     'value': [
@@ -31,14 +21,24 @@ Map<String, dynamic> staticQuestions = {
     ],
     'answer': ''
   },
-  'carmarketvalue': {
-    'languages': {'EN': "Car Market Value", 'FR': '', 'AR': ''},
-    'value': 'double',
-    'answer': ''
-  },
   'yearofmake': {
     'languages': {'EN': "Year of Make", 'FR': '', 'AR': ''},
     'value': 'int',
+    'answer': ''
+  },
+  'neworrenewal': {
+    'languages': {'EN': "New or Renewal", 'FR': '', 'AR': ''},
+    'value': 'bool',
+    'answer': ''
+  },
+  'sportscar': {
+    'languages': {'EN': "New or Renewal", 'FR': '', 'AR': ''},
+    'value': 'bool',
+    'answer': ''
+  },
+  'carmarketvalue': {
+    'languages': {'EN': "Car Market Value", 'FR': '', 'AR': ''},
+    'value': 'double',
     'answer': ''
   },
   'deductible': {
@@ -48,17 +48,17 @@ Map<String, dynamic> staticQuestions = {
   },
   'insurancetype': {
     'languages': {'EN': "Insurance Type", 'FR': '', 'AR': ''},
-    'value': ['All Risks + (MPF)', 'All Risks (MRF)', 'other'],
+    'value': ['All Risks + (MPF)', 'All Risks (MRF)'],
     'answer': ''
   },
   'vehicleagencyrepair': {
     'languages': {'EN': "Vehicle Agency Repair", 'FR': '', 'AR': ''},
-    'value': 'bool',
+    'value': ['Yes', 'No'],
     'answer': ''
   },
   'replacementcar': {
     'languages': {'EN': "Replacement Car", 'FR': '', 'AR': ''},
-    'value': 'bool',
+    'value': ['Yes', 'No'],
     'answer': ''
   },
 };

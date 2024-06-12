@@ -23,8 +23,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
   int indexOfCardBrand = 0;
   int indexOfVehicleAgency = 0;
   int indexReplacementCar = 0;
+  bool isVanOrMotorcycle = false;
+  bool enableSelection = true;
+  String natureOfVehicleAnswer = '';
   var currentQuestionKey;
   var currentQuestion;
+
   @override
   void initState() {
     super.initState();
@@ -57,6 +61,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                   questionContentWidget(context, currentQuestion, setState,
                       controller: currentController,
                       chosenYear: chosenYearOfMake,
+                      enabled: enableSelection,
                       callCalendarBack: yearOfMakeCallBack),
                   const SizedBox(height: 20),
                   Row(

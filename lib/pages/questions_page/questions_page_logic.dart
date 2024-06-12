@@ -9,6 +9,11 @@ extension QuestionsPageLogic on _QuestionsPageState {
     indexOfCardBrand = keys!.indexOf('carbrand');
     indexOfVehicleAgency = keys!.indexOf('vehicleagencyrepair');
     indexReplacementCar = keys!.indexOf('replacementcar');
+    String natureOfVehicleAnswer =
+        Provider.of<PrefsData>(context, listen: false)
+            .questions['natureofvehicle']['answer'];
+    isVanOrMotorcycle =
+        natureOfVehicleAnswer == 'Motorcycle' || natureOfVehicleAnswer == 'Van';
 
     setState(() => isLoading = false);
   }
@@ -22,6 +27,11 @@ extension QuestionsPageLogic on _QuestionsPageState {
       var answer = Provider.of<PrefsData>(context, listen: false)
               .questions['natureofvehicle']['answer'] ??
           '';
+      if (answer == 'Motorcycle' || answer == 'Van') {
+        setState(() => isVanOrMotorcycle = true);
+      } else {
+        setState(() => isVanOrMotorcycle = false);
+      }
       if (answer != 'Private Car') {
         keys!.removeWhere((element) => element == 'carbrand');
         Provider.of<PrefsData>(context, listen: false)
@@ -35,26 +45,41 @@ extension QuestionsPageLogic on _QuestionsPageState {
 
   checkInsuranceTypeAnswer() {
     if (Provider.of<PrefsData>(context, listen: false)
-        .questions['insuranceType']['answer']
+        .questions['insurancetype']['answer']
         .isNotEmpty) {
       var answer = Provider.of<PrefsData>(context, listen: false)
-              .questions['insuranceType']['answer'] ??
+              .questions['insurancetype']['answer'] ??
           '';
-      if (answer == 'All Risks + (MPF)') {
-        keys!.removeWhere((element) => element == 'replacementcar');
-        Provider.of<PrefsData>(context, listen: false)
-            .updateAnswer('replacementcar', '');
-        if (!keys!.contains('vehicleagencyrepair')) {
-          keys!.insert(indexOfVehicleAgency, 'vehicleagencyrepair');
-        }
-      } else {
-        keys!.removeWhere((element) => element == 'vehicleagencyrepair');
-        Provider.of<PrefsData>(context, listen: false)
-            .updateAnswer('vehicleagencyrepair', '');
-        if (!keys!.contains('replacementcar')) {
-          keys!.insert(indexOfVehicleAgency, 'replacementcar');
-        }
+      switch (answer) {
+        case 'All Risks (MRF)':
+          if (isVanOrMotorcycle) {
+            keys!.removeWhere((element) => element == 'vehicleagencyrepair');
+            Provider.of<PrefsData>(context, listen: false)
+                .updateAnswer('vehicleagencyrepair', '');
+            if (!keys!.contains('replacementcar')) {
+              keys!.insert(indexOfVehicleAgency, 'replacementcar');
+            }
+            Provider.of<PrefsData>(context, listen: false)
+                .updateAnswer('replacementcar', 'No');
+            setState(() => enableSelection = false);
+          }
       }
+
+      // if (answer == 'All Risks + (MPF)') {
+      //   keys!.removeWhere((element) => element == 'replacementcar');
+      //   Provider.of<PrefsData>(context, listen: false)
+      //       .updateAnswer('replacementcar', '');
+      //   if (!keys!.contains('vehicleagencyrepair')) {
+      //     keys!.insert(indexOfVehicleAgency, 'vehicleagencyrepair');
+      //   }
+      // } else {
+      //   keys!.removeWhere((element) => element == 'vehicleagencyrepair');
+      //   Provider.of<PrefsData>(context, listen: false)
+      //       .updateAnswer('vehicleagencyrepair', '');
+      //   if (!keys!.contains('replacementcar')) {
+      //     keys!.insert(indexOfVehicleAgency, 'replacementcar');
+      //   }
+      // }
     }
   }
 }

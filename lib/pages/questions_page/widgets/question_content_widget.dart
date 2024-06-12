@@ -1,6 +1,4 @@
-import 'package:adir_web_app/common/widgets/date_picker_widget.dart';
 import 'package:adir_web_app/common/widgets/textField.dart';
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 
 //TODO Fix this
@@ -9,19 +7,24 @@ Widget questionContentWidget(BuildContext context,
     Map<String, dynamic> question, Function(void Function()) setState,
     {TextEditingController? controller,
     String? chosenYear,
+    bool? enabled,
     Function? callCalendarBack}) {
   if (question['value'] is List) {
     return Column(
       children: (question['value'] as List<dynamic>)
           .map((option) => ListTile(
+                enabled: enabled ?? true,
                 title: Text(option),
                 leading: Radio(
                   value: option,
+                  toggleable: enabled ?? true,
                   groupValue: question['answer'],
                   onChanged: (value) {
-                    setState(() {
-                      question['answer'] = value;
-                    });
+                    enabled == false
+                        ? {}
+                        : setState(() {
+                            question['answer'] = value;
+                          });
                   },
                 ),
               ))
@@ -57,12 +60,41 @@ Widget questionContentWidget(BuildContext context,
         },
         inputType: TextInputType.number);
   } else if (question['languages']['EN'] == 'Year of Make') {
-    return datePicker(
-        context: context,
-        label: 'Choose a year',
-        chosenDate: chosenYear,
-        calendarViewMode: CalendarDatePicker2Mode.year,
-        callCalendarBack: callCalendarBack!);
+    return TextField(
+        controller: controller,
+        readOnly: true,
+        decoration: InputDecoration(
+          labelText: 'Select Year',
+          border: OutlineInputBorder(),
+        ),
+        onTap: () async {
+          int? selectedYear = await showDialog<int>(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Select Year'),
+                content: Container(
+                  height: 300,
+                  width: 300,
+                  child: YearPicker(
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(DateTime.now().year),
+                    selectedDate: DateTime.now(),
+                    onChanged: (DateTime dateTime) {
+                      Navigator.pop(context, dateTime.year);
+                    },
+                  ),
+                ),
+              );
+            },
+          );
+
+          if (selectedYear != null) {
+            setState(() {
+              controller!.text = selectedYear.toString();
+            });
+          }
+        });
   } else if (question['value'] == 'int') {
     return TextFormField(
         decoration: const InputDecoration(labelText: 'Enter value'),

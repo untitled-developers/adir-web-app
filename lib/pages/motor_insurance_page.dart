@@ -31,7 +31,7 @@ class _MotorInsurancePageState extends State<MotorInsurancePage> {
         ),
         child: images[i] == null
             ? Image.asset('assets/images/temp${i + 1}.png', fit: BoxFit.cover)
-            : Image.file(images[i]!, fit: BoxFit.cover),
+            : Image.network(images[i]!.path, fit: BoxFit.cover),
       ),
     );
   }

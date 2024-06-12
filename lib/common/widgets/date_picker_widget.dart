@@ -133,6 +133,7 @@ Widget _buildCalendarWithActionButtons(BuildContext context, calendarType,
   final config = CalendarDatePicker2WithActionButtonsConfig(
     calendarType: calendarType,
     disableMonthPicker: calendarViewMode != null,
+    disableModePicker: true,
     calendarViewMode: calendarViewMode,
     gapBetweenCalendarAndButtons: 10,
     selectedDayTextStyle: const TextStyle(

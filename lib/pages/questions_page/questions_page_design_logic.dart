@@ -5,9 +5,11 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
     currentController = TextEditingController();
     Provider.of<PrefsData>(context, listen: false)
         .updateAnswer(currentQuestionKey, currentQuestion['answer']);
-    if (currentQuestionKey == 'natureofvehicle')
+    if (currentQuestionKey == 'natureofvehicle') {
       checkNatureOfVehicleAnswer();
-    else if (currentQuestionKey == 'insurancetype') checkInsuranceTypeAnswer();
+    } else if (currentQuestionKey == 'insurancetype') {
+      checkInsuranceTypeAnswer();
+    }
     setState(() {
       if (currentIndex < keys!.length - 1) {
         currentIndex++;
