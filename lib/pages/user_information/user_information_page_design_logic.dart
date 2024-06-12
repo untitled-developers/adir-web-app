@@ -50,30 +50,35 @@ extension UserInformationPageDesignLogic on _UserInformationPageState {
         "place_of_birth": placeOfBirthController.text,
         "applicant_phone": phoneNumberController.textController.text,
       };
-      DialogUtils.showProgressDialog(context);
-      Session().apiClient.usersAPI.updateUserInfo(data).then((response) {
-        Navigator.of(context, rootNavigator: true).pop();
-        setState(() => isEditing = false);
-        DialogUtils.showNotifyDialog(context, body: Text('Done'));
-      }).catchError((error, stack) {
-        logger.e('Error', error: error, stackTrace: stack);
-        if (mounted) {
-          if (error is DioException && error.response != null) {
-            DialogUtils.showErrorDialog(
-              context,
-              body: Text(
-                error.response!.data['message'],
-              ),
-            );
-          } else {
-            DialogUtils.showErrorDialog(
-              context,
-              body: const Text("Error while editing info."),
-            );
-          }
-        }
-      });
+
+      //DialogUtils.showProgressDialog(context);
+      // Session().apiClient.usersAPI.updateUserInfo(data).then((response) {
+      //   Navigator.of(context, rootNavigator: true).pop();
+      //   setState(() => isEditing = false);
+      //   DialogUtils.showNotifyDialog(context, body: Text('Done'));
+      // }).catchError((error, stack) {
+      //   logger.e('Error', error: error, stackTrace: stack);
+      //   if (mounted) {
+      //     if (error is DioException && error.response != null) {
+      //       DialogUtils.showErrorDialog(
+      //         context,
+      //         body: Text(
+      //           error.response!.data['message'],
+      //         ),
+      //       );
+      //     } else {
+      //       DialogUtils.showErrorDialog(
+      //         context,
+      //         body: const Text("Error while editing info."),
+      //       );
+      //     }
+      //   }
+      // });
     }
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => QuestionsPage()));
   }
-  onProceed ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> QuestionsPage()));
+
+  onProceed() => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => QuestionsPage()));
 }

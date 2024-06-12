@@ -42,6 +42,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
   Widget build(BuildContext context) {
     currentQuestionKey = keys?[currentIndex] ?? '';
     currentQuestion = allQuestions?[currentQuestionKey] ?? '';
+    currentController = TextEditingController();
+    setState(() {
+      currentController.text = currentQuestion['answer'].toString();
+    });
+    print(
+        'Answer::::: $currentQuestionKey ${Provider.of<PrefsData>(context, listen: false).questions[currentQuestionKey]['answer']}');
 
     return Scaffold(
       appBar: AppBar(
@@ -51,44 +57,50 @@ class _QuestionsPageState extends State<QuestionsPage> {
           ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    currentQuestion['languages']['EN'],
-                    style: const TextStyle(fontSize: 24),
-                  ),
-                  const SizedBox(height: 20),
-                  //TODO This must be using conditions
-                  questionContentWidget(context, currentQuestion, setState,
-                      controller: currentController,
-                      chosenYear: chosenYearOfMake,
-                      enabled: enableSelection,
-                      callCalendarBack: yearOfMakeCallBack),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+              child: Center(
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: 500),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Text(
+                        currentQuestion['languages']['EN'],
+                        style: const TextStyle(fontSize: 24),
+                      ),
+                      const SizedBox(height: 20),
+                      //TODO This must be using conditions
+                      questionContentWidget(context, currentQuestion, setState,
+                          controller: currentController,
+                          chosenYear: chosenYearOfMake,
+                          enabled: enableSelection,
+                          callCalendarBack: yearOfMakeCallBack),
+                      const SizedBox(height: 20),
                       Row(
-                        children: [
-                          TextButton(
-                            onPressed: _previousQuestion,
-                            child: const Text('Back'),
-                          ),
-                          const SizedBox(width: 50),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                backgroundColor: Theme.of(context).primaryColor,
-                                foregroundColor: Colors.white),
-                            onPressed: _nextQuestion,
-                            child: const Text('Next'),
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Row(
+                            children: [
+                              TextButton(
+                                onPressed: _previousQuestion,
+                                child: const Text('Back'),
+                              ),
+                              const SizedBox(width: 50),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                    backgroundColor:
+                                        Theme.of(context).primaryColor,
+                                    foregroundColor: Colors.white),
+                                onPressed: _nextQuestion,
+                                child: const Text('Next'),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
     );

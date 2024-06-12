@@ -83,10 +83,13 @@ showCalendarDialog(
           Animation secondaryAnimation) {
         return Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.15,
+              horizontal: MediaQuery.of(context).size.width < 100
+                  ? 10
+                  : MediaQuery.of(context).size.width * 0.15,
               vertical: 12),
           child: Center(
             child: Container(
+                constraints: BoxConstraints(maxWidth: 500),
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -133,9 +136,10 @@ Widget _buildCalendarWithActionButtons(BuildContext context, calendarType,
   final config = CalendarDatePicker2WithActionButtonsConfig(
     calendarType: calendarType,
     disableMonthPicker: calendarViewMode != null,
-    disableModePicker: true,
+    //disableModePicker: true,
     calendarViewMode: calendarViewMode,
-    gapBetweenCalendarAndButtons: 10,
+    gapBetweenCalendarAndButtons:
+        MediaQuery.of(context).size.width >= 100 ? 10 : 2,
     selectedDayTextStyle: const TextStyle(
         fontWeight: FontWeight.w700, fontSize: 15, color: Colors.white),
     selectedDayHighlightColor: Theme.of(context).primaryColor,

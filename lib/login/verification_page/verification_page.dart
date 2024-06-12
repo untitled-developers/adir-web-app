@@ -149,9 +149,14 @@ class _VerificationPageState extends State<VerificationPage> {
                               borderRadius: BorderRadius.circular(14),
                             ),
                           ),
-                          onPressed: () => validPin
-                              ? _verifySMSCode(_pinPutController.text)
-                              : {},
+                          //TODO fix this
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UserInformationPage())),
+                          // validPin
+                          //     ? _verifySMSCode(_pinPutController.text)
+                          //     : {},
                           child: const Text(
                             'Submit',
                             style: TextStyle(color: Colors.white),

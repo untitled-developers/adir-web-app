@@ -83,6 +83,7 @@ Widget questionContentWidget(BuildContext context,
                     selectedDate: DateTime.now(),
                     onChanged: (DateTime dateTime) {
                       question['answer'] = dateTime.year.toString();
+                      controller!.text = question['answer'].toString();
                       Navigator.pop(context, dateTime.year);
                     },
                   ),
