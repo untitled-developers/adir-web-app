@@ -2,8 +2,11 @@ import 'dart:io' as io;
 
 import 'package:adir_web_app/api/session.dart';
 import 'package:adir_web_app/common/slide_route.dart';
+import 'package:adir_web_app/common/widgets/textField.dart';
 import 'package:adir_web_app/login/verification_page/verification_page.dart';
 import 'package:adir_web_app/main.dart';
+import 'package:adir_web_app/pages/questions_page/widgets/description_widget.dart';
+import 'package:adir_web_app/pages/questions_page/widgets/hello_im_lisa_widget.dart';
 import 'package:adir_web_app/utils/dialog_utils.dart';
 import 'package:adir_web_app/utils/phone_field_controller.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -27,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   late PhoneFieldController phoneNumberController = PhoneFieldController(
     textController: TextEditingController(),
   );
+  TextEditingController nameController = TextEditingController();
   bool isCheckingPhoneNumber = false;
   bool? validPhoneNumber;
   late int _verificationId;
@@ -43,14 +47,16 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Adir Web Application',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
+                  helloImLisaWidget(),
+                  descriptionWidget(context, -1),
+                  const SizedBox(height: 50),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: textField(
+                        label: 'First Name',
+                        controller: nameController,
+                        enabled: true,
+                      )),
                   const SizedBox(height: 20),
                   Container(
                       decoration: BoxDecoration(

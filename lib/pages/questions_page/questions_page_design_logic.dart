@@ -4,13 +4,9 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
   void _nextQuestion() {
     Provider.of<PrefsData>(context, listen: false)
         .updateAnswer(currentQuestionKey, currentQuestion['answer']);
-
-    if (currentQuestionKey == 'natureofvehicle') {
-      checkNatureOfVehicleAnswer();
-    } else if (currentQuestionKey == 'insurancetype') {
-      checkInsuranceTypeAnswer();
-    } else if (currentQuestionKey == 'yearofmake') {
-      checkYearOfMakeGap();
+    if (currentIndex == 2) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
     }
     setState(() {
       if (currentIndex < keys!.length - 1) {

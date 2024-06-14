@@ -4,7 +4,7 @@ import 'package:adir_web_app/api/session.dart';
 import 'package:adir_web_app/common/slide_route.dart';
 import 'package:adir_web_app/login/login_page.dart';
 import 'package:adir_web_app/main.dart';
-import 'package:adir_web_app/pages/user_information/user_information_page.dart';
+import 'package:adir_web_app/pages/questions_page/questions_page.dart';
 import 'package:adir_web_app/utils/dialog_utils.dart';
 import 'package:adir_web_app/utils/prefs_data.dart';
 import 'package:dio/dio.dart';
@@ -149,14 +149,9 @@ class _VerificationPageState extends State<VerificationPage> {
                               borderRadius: BorderRadius.circular(14),
                             ),
                           ),
-                          //TODO fix this
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UserInformationPage())),
-                          // validPin
-                          //     ? _verifySMSCode(_pinPutController.text)
-                          //     : {},
+                          onPressed: () => validPin
+                              ? _verifySMSCode(_pinPutController.text)
+                              : {},
                           child: const Text(
                             'Submit',
                             style: TextStyle(color: Colors.white),

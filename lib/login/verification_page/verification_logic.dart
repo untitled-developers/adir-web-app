@@ -37,7 +37,7 @@ extension VerificationPageCode on _VerificationPageState {
           }
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (context) => const UserInformationPage()),
+                  builder: (context) => const QuestionsPage(index: 3)),
               (Route<dynamic> route) => false);
         }
       }).catchError((error, stack) async {

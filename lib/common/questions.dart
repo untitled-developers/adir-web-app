@@ -1,15 +1,4 @@
 Map<String, dynamic> staticQuestions = {
-  'natureofvehicle': {
-    'languages': {'EN': "Nature of vehicle", 'FR': '', 'AR': ''},
-    'value': [
-      'Private Car',
-      'Convertible Soft Top',
-      'Truck',
-      'Motorcycle',
-      'Van'
-    ],
-    'answer': ''
-  },
   'carbrand': {
     'languages': {'EN': "Car Brand", 'FR': '', 'AR': ''},
     'value': [
@@ -21,14 +10,30 @@ Map<String, dynamic> staticQuestions = {
     ],
     'answer': ''
   },
+  'carmodel': {
+    'languages': {'EN': "Car Model", 'FR': '', 'AR': ''},
+    'value': ['Model 1', 'Model 2', 'Model 3', 'Model 4', 'Others'],
+    'answer': ''
+  },
   'yearofmake': {
     'languages': {'EN': "Year of Make", 'FR': '', 'AR': ''},
     'value': 'int',
     'answer': ''
   },
-  'neworrenewal': {
-    'languages': {'EN': "New or Renewal", 'FR': '', 'AR': ''},
-    'value': 'bool',
+  'insurancetype': {
+    'languages': {'EN': "Insurance Type", 'FR': '', 'AR': ''},
+    'value': ['Motor All Risks (650\$)', 'Motor All Risks Plus (750\$)'],
+    'answer': ''
+  },
+  'natureofvehicle': {
+    'languages': {'EN': "Nature of vehicle", 'FR': '', 'AR': ''},
+    'value': [
+      'Private Car',
+      'Convertible Soft Top',
+      'Truck',
+      'Motorcycle',
+      'Van'
+    ],
     'answer': ''
   },
   'sportscar': {
@@ -39,26 +44,6 @@ Map<String, dynamic> staticQuestions = {
   'carmarketvalue': {
     'languages': {'EN': "Car Market Value", 'FR': '', 'AR': ''},
     'value': 'double',
-    'answer': ''
-  },
-  'deductible': {
-    'languages': {'EN': "Deductible", 'FR': '', 'AR': ''},
-    'value': ['0 USD', '100 USD', 'other'],
-    'answer': ''
-  },
-  'insurancetype': {
-    'languages': {'EN': "Insurance Type", 'FR': '', 'AR': ''},
-    'value': ['All Risks + (MPF)', 'All Risks (MRF)'],
-    'answer': ''
-  },
-  'vehicleagencyrepair': {
-    'languages': {'EN': "Vehicle Agency Repair", 'FR': '', 'AR': ''},
-    'value': ['Yes', 'No'],
-    'answer': ''
-  },
-  'replacementcar': {
-    'languages': {'EN': "Replacement Car", 'FR': '', 'AR': ''},
-    'value': ['Yes', 'No'],
     'answer': ''
   },
 };

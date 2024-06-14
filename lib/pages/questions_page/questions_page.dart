@@ -1,4 +1,9 @@
+import 'package:adir_web_app/login/login_page.dart';
 import 'package:adir_web_app/pages/questions_page/done_page.dart';
+import 'package:adir_web_app/pages/questions_page/widgets/covers_info_widget.dart';
+import 'package:adir_web_app/pages/questions_page/widgets/description_widget.dart';
+import 'package:adir_web_app/pages/questions_page/widgets/footer_widget.dart';
+import 'package:adir_web_app/pages/questions_page/widgets/hello_im_lisa_widget.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/question_content_widget.dart';
 import 'package:adir_web_app/utils/prefs_data.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +13,9 @@ part 'questions_page_design_logic.dart';
 part 'questions_page_logic.dart';
 
 class QuestionsPage extends StatefulWidget {
-  const QuestionsPage({super.key});
+  const QuestionsPage({super.key, this.index});
+
+  final int? index;
 
   @override
   State<QuestionsPage> createState() => _QuestionsPageState();
@@ -43,11 +50,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
     currentQuestionKey = keys?[currentIndex] ?? '';
     currentQuestion = allQuestions?[currentQuestionKey] ?? '';
     currentController = TextEditingController();
-    setState(() {
-      currentController.text = currentQuestion['answer'].toString();
-    });
-    print(
-        'Answer::::: $currentQuestionKey ${Provider.of<PrefsData>(context, listen: false).questions[currentQuestionKey]['answer']}');
+
+    if (currentQuestion != null && currentQuestion.isNotEmpty) {
+      setState(() {
+        currentController.text = currentQuestion['answer'].toString();
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -64,6 +72,9 @@ class _QuestionsPageState extends State<QuestionsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      helloImLisaWidget(),
+                      descriptionWidget(context, currentIndex),
+                      const SizedBox(height: 50),
                       Text(
                         currentQuestion['languages']['EN'],
                         style: const TextStyle(fontSize: 24),
@@ -75,6 +86,17 @@ class _QuestionsPageState extends State<QuestionsPage> {
                           chosenYear: chosenYearOfMake,
                           enabled: enableSelection,
                           callCalendarBack: yearOfMakeCallBack),
+                      const SizedBox(height: 20),
+                      if (currentQuestionKey == 'insurancetype')
+                        footerWidget(
+                            'Do you want to know more about the covers & benefits of each option?',
+                            () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const CoversInfoWidget()));
+                        }),
                       const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
