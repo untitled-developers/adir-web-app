@@ -1,13 +1,12 @@
 import 'package:adir_web_app/common/widgets/textField.dart';
 import 'package:flutter/material.dart';
 
-//TODO Fix this
-//TODO Handle case of int
 Widget questionContentWidget(BuildContext context,
     Map<String, dynamic> question, Function(void Function()) setState,
     {TextEditingController? controller,
     String? chosenYear,
     bool? enabled,
+    bool? isValid,
     Function? callCalendarBack}) {
   if (question['value'] is List) {
     return Column(
@@ -52,13 +51,13 @@ Widget questionContentWidget(BuildContext context,
     return textField(
         label: 'Enter Value',
         controller: controller!,
-        isValid: true,
-        onChanged: (value) {
-          setState(() {
-            question['answer'] = double.tryParse(value) ?? '';
-            print('testtt here ${question['answer'].toString()}');
-          });
-        },
+        // onChanged: (value) {
+        //   setState(() {
+        //     controller = controller;
+        //     question['answer'] = double.tryParse(value) ?? '';
+        //     print('testttt ${question['answer']} ');
+        //   });
+        // },
         inputType: TextInputType.number);
   } else if (question['languages']['EN'] == 'Year of Make') {
     return TextField(
@@ -100,13 +99,57 @@ Widget questionContentWidget(BuildContext context,
         });
   } else if (question['value'] == 'int') {
     return TextFormField(
-        decoration: const InputDecoration(labelText: 'Enter value'),
-        keyboardType: TextInputType.number,
-        onChanged: (value) {
-          setState(() {
-            question['answer'] = int.tryParse(value) ?? '';
-          });
-        });
+      decoration: const InputDecoration(labelText: 'Enter value'),
+      keyboardType: TextInputType.number,
+      controller: controller,
+      // onChanged: (value) {
+      //   setState(() {
+      //     question['answer'] = int.tryParse(value) ?? '';
+      //   });
+      // }
+    );
+  } else if (question['value'] == 'string') {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.8,
+      child: TextFormField(
+        controller: controller,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: (value) {
+          RegExp emailValid = RegExp(
+              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+          if (emailValid.hasMatch(controller!.text) == false) {
+            return 'Invalid Email';
+          }
+          return null;
+        },
+        textInputAction: TextInputAction.next,
+        cursorColor: Theme.of(context).primaryColor,
+        decoration: InputDecoration(
+            filled: true,
+            labelText: 'Email',
+            floatingLabelStyle:
+                const TextStyle(fontSize: 12, color: Colors.grey),
+            labelStyle: const TextStyle(fontSize: 12, color: Colors.grey),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: const BorderRadius.all(Radius.circular(14)),
+              borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.secondary, width: 1),
+            ),
+            enabledBorder: const UnderlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(14)),
+              borderSide: BorderSide(color: Colors.transparent, width: 0),
+            ),
+            errorBorder: errorBorder(),
+            focusedErrorBorder: errorBorder()),
+      ),
+    );
   }
   return Container();
 }
+
+OutlineInputBorder errorBorder() => const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(14)),
+      borderSide: BorderSide(color: Colors.red, width: 1),
+    );

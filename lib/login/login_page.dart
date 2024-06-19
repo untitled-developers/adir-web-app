@@ -137,26 +137,20 @@ class _LoginPageState extends State<LoginPage> {
                         )
                       : const SizedBox(),
                   const SizedBox(height: 30),
-                  SizedBox(
-                    width: double.maxFinite,
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints.tightFor(height: 42),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.secondary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                        ),
-                        onPressed: onLogIn,
-                        child: const Text(
-                          'Log in',
-                          style: TextStyle(color: Colors.white),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 100,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              foregroundColor: Colors.white),
+                          onPressed: onLogIn,
+                          child: const Text('Next'),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                   const SizedBox(height: 10),
                 ]),

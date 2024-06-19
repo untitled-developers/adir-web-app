@@ -9,14 +9,7 @@ extension QuestionsPageLogic on _QuestionsPageState {
     allQuestions
         ?.addAll(Provider.of<PrefsData>(context, listen: false).questions);
     keys = allQuestions?.keys.toList();
-    indexOfCardBrand = keys!.indexOf('carbrand');
-    indexOfVehicleAgency = keys!.indexOf('vehicleagencyrepair');
-    indexReplacementCar = keys!.indexOf('replacementcar');
-    String natureOfVehicleAnswer =
-        Provider.of<PrefsData>(context, listen: false)
-            .questions['natureofvehicle']['answer'];
-    isVanOrMotorcycle =
-        natureOfVehicleAnswer == 'Motorcycle' || natureOfVehicleAnswer == 'Van';
+    currentController.addListener(() => setState(() {}));
 
     setState(() => isLoading = false);
   }

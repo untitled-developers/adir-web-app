@@ -25,25 +25,29 @@ Map<String, dynamic> staticQuestions = {
     'value': ['Motor All Risks (650\$)', 'Motor All Risks Plus (750\$)'],
     'answer': ''
   },
-  'natureofvehicle': {
-    'languages': {'EN': "Nature of vehicle", 'FR': '', 'AR': ''},
-    'value': [
-      'Private Car',
-      'Convertible Soft Top',
-      'Truck',
-      'Motorcycle',
-      'Van'
-    ],
-    'answer': ''
-  },
-  'sportscar': {
-    'languages': {'EN': "New or Renewal", 'FR': '', 'AR': ''},
+  'elzemeh': {
+    'languages': {'EN': "Elzemeh", 'FR': '', 'AR': ''},
     'value': 'bool',
     'answer': ''
   },
-  'carmarketvalue': {
-    'languages': {'EN': "Car Market Value", 'FR': '', 'AR': ''},
+  'registrationnumber': {
+    'languages': {'EN': "Registration Number", 'FR': '', 'AR': ''},
     'value': 'double',
+    'answer': ''
+  },
+  'chassisnumber': {
+    'languages': {'EN': "Chassis Number", 'FR': '', 'AR': ''},
+    'value': 'double',
+    'answer': ''
+  },
+  'paymentmethod': {
+    'languages': {'EN': "How would you like to pay?", 'FR': '', 'AR': ''},
+    'value': ['Fresh Card', 'Cash on Delivery'],
+    'answer': ''
+  },
+  'email': {
+    'languages': {'EN': "Email", 'FR': '', 'AR': ''},
+    'value': 'string',
     'answer': ''
   },
 };

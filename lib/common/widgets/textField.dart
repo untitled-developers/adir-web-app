@@ -13,12 +13,11 @@ Widget textField(
   return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
     return TextFormField(
-      textInputAction: TextInputAction.next,
       autovalidateMode: isValid != null && !isValid
           ? AutovalidateMode.always
           : AutovalidateMode.onUserInteraction,
       validator: (value) {
-        if (value == null || value.isEmpty && isValid == false) {
+        if ((value == null || value.isEmpty)) {
           return "Can't be empty";
         } else if (errorMessage != null) {
           return errorMessage;
