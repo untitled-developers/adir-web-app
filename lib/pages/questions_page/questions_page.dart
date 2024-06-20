@@ -26,11 +26,11 @@ class QuestionsPage extends StatefulWidget {
 class _QuestionsPageState extends State<QuestionsPage> {
   int currentIndex = 0;
   bool isLoading = true;
+  bool showValidationMessage = false;
   List<String>? keys;
   TextEditingController currentController = TextEditingController();
   TextEditingController nextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String? _emailValidationMessage;
   Map<String, dynamic>? allQuestions;
   String? chosenYearOfMake = '2024';
   bool enableSelection = true;
@@ -45,22 +45,26 @@ class _QuestionsPageState extends State<QuestionsPage> {
   }
 
   @override
+  void dispose() {
+    currentController.dispose();
+    nextController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     currentQuestionKey = keys?[currentIndex] ?? '';
     currentQuestion = allQuestions?[currentQuestionKey] ?? '';
     dynamic nextQuestion;
-    currentController = TextEditingController();
     if (currentQuestionKey == 'registrationnumber') {
       nextQuestion = allQuestions?[keys?[currentIndex + 1]] ?? '';
     }
 
     if (currentQuestion != null && currentQuestion.isNotEmpty) {
-      setState(() {
-        currentController.text = currentQuestion['answer'].toString();
-        if (currentQuestionKey == 'registrationnumber') {
-          nextController.text = nextQuestion['answer'].toString();
-        }
-      });
+      currentController.text = currentQuestion['answer'].toString();
+      if (currentQuestionKey == 'registrationnumber') {
+        nextController.text = nextQuestion['answer'].toString();
+      }
     }
     return Scaffold(
       appBar: AppBar(
@@ -129,16 +133,22 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     builder: (context) =>
                                         const CoversInfoWidget()));
                           }),
+                        if (showValidationMessage)
+                          Text(
+                            'This question is required.',
+                            style: TextStyle(color: Colors.red),
+                          ),
                         const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Row(
                               children: [
-                                TextButton(
-                                  onPressed: _previousQuestion,
-                                  child: const Text('Back'),
-                                ),
+                                if (currentIndex != 0)
+                                  TextButton(
+                                    onPressed: _previousQuestion,
+                                    child: const Text('Back'),
+                                  ),
                                 const SizedBox(width: 50),
                                 TextButton(
                                   style: TextButton.styleFrom(

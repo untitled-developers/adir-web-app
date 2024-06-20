@@ -51,13 +51,9 @@ Widget questionContentWidget(BuildContext context,
     return textField(
         label: 'Enter Value',
         controller: controller!,
-        // onChanged: (value) {
-        //   setState(() {
-        //     controller = controller;
-        //     question['answer'] = double.tryParse(value) ?? '';
-        //     print('testttt ${question['answer']} ');
-        //   });
-        // },
+        onChanged: (value) {
+          question['answer'] = double.tryParse(value) ?? '';
+        },
         inputType: TextInputType.number);
   } else if (question['languages']['EN'] == 'Year of Make') {
     return TextField(

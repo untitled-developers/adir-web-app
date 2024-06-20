@@ -4,11 +4,13 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
   void _nextQuestion() {
     Provider.of<PrefsData>(context, listen: false)
         .updateAnswer(currentQuestionKey, currentQuestion['answer']);
+    if (currentIndex == 0 || currentIndex == 1 || currentIndex == 2) {
+      validateRequiredQuestions();
+      return;
+    }
     if (currentIndex == 0 && currentQuestion['answer'] == 'Other') {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> CaseOthersPage()));
-    } else if (currentIndex == 2) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
+          context, MaterialPageRoute(builder: (context) => CaseOthersPage()));
     } else if (currentIndex == 7 && currentQuestion['answer'] == 'Fresh Card') {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => LinkToPaymentGatewayPage()));
@@ -35,6 +37,7 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
         }
       });
     }
+    currentController = TextEditingController();
   }
 
   void _previousQuestion() {

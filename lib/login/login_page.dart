@@ -139,16 +139,22 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: 100,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              foregroundColor: Colors.white),
-                          onPressed: onLogIn,
-                          child: const Text('Next'),
-                        ),
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: const Text('Back'),
+                          ),
+                          const SizedBox(width: 50),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                                backgroundColor: Theme.of(context).primaryColor,
+                                foregroundColor: Colors.white),
+                            onPressed: onLogIn,
+                            child: const Text('Next'),
+                          ),
+                        ],
                       ),
                     ],
                   ),

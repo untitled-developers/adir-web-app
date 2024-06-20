@@ -10,9 +10,9 @@ Map<String, dynamic> staticQuestions = {
     ],
     'answer': ''
   },
-  'carmodel': {
-    'languages': {'EN': "Car Model", 'FR': '', 'AR': ''},
-    'value': ['Model 1', 'Model 2', 'Model 3', 'Model 4', 'Others'],
+  'carvalue': {
+    'languages': {'EN': "Enter the car value in USD(\$)", 'FR': '', 'AR': ''},
+    'value': 'double',
     'answer': ''
   },
   'yearofmake': {
