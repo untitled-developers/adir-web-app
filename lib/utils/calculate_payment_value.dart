@@ -26,7 +26,7 @@ double getAllRisksPaymentValue(int yearOfMake, double carValue) {
     }
   }
 
-  double value = allRisksMinValue * rate;
+  double value = carValue * rate;
   return rate > 0 && value <= allRisksMinValue ? allRisksMinValue : value;
 }
 
@@ -76,7 +76,7 @@ double getAllRisksPlusPaymentValue(int yearOfMake, double carValue) {
     }
   }
 
-  double value = allRisksPlusMinValue * rate;
+  double value = carValue * rate;
   return (rate > 0 && value <= allRisksPlusMinValue)
       ? allRisksPlusMinValue
       : value;

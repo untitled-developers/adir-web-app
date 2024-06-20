@@ -26,6 +26,16 @@ extension QuestionsPageLogic on _QuestionsPageState {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => CaseOthersPage()));
       } else if (currentIndex == 2) {
+        int yearOfMake = int.parse(
+            Provider.of<PrefsData>(context, listen: false)
+                .questions['yearofmake']['answer']
+                .toString());
+        double carValue = double.parse(
+            Provider.of<PrefsData>(context, listen: false)
+                .questions['carvalue']['answer']
+                .toString());
+        double value = getAllRisksPaymentValue(yearOfMake, carValue);
+        print('testtt $value');
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
       }
