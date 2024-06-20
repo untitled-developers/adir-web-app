@@ -22,7 +22,7 @@ Map<String, dynamic> staticQuestions = {
   },
   'insurancetype': {
     'languages': {'EN': "Insurance Type", 'FR': '', 'AR': ''},
-    'value': ['Motor All Risks (650\$)', 'Motor All Risks Plus (750\$)'],
+    'value': ['Motor All Risks', 'Motor All Risks Plus'],
     'answer': ''
   },
   'elzemeh': {

@@ -23,7 +23,9 @@ extension VerificationPageCode on _VerificationPageState {
             name: widget.name ?? '',
             payLoad: Provider.of<PrefsData>(context, listen: false).questions,
             version: 1)
-        .then((String token) async {
+        .then((response) async {
+      String token = response['access_token'];
+
       var sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.remove('phoneNumberForVerification');
       sharedPreferences.remove('idForVerification');
@@ -41,6 +43,10 @@ extension VerificationPageCode on _VerificationPageState {
           if (!kIsWeb) {
             storage.write(key: 'accessToken', value: token);
           }
+          Map<String, dynamic> submittedQuestions = response['submission'];
+          print('SubmittedQuestions: $submittedQuestions');
+          Provider.of<PrefsData>(context, listen: false)
+              .updateQuestions(submittedQuestions);
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                   builder: (context) => const QuestionsPage(index: 3)),

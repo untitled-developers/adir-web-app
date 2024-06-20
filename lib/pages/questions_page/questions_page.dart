@@ -8,7 +8,6 @@ import 'package:adir_web_app/pages/questions_page/widgets/footer_buttons.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/footer_widget.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/hello_im_lisa_widget.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/question_content_widget.dart';
-import 'package:adir_web_app/utils/calculate_payment_value.dart';
 import 'package:adir_web_app/utils/prefs_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -120,7 +119,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                   callCalendarBack: yearOfMakeCallBack),
                           const SizedBox(height: 20),
                           if (currentQuestionKey == 'insurancetype')
-                            footerWidget(
+                            footerWidget(context,
                                 'Do you want to know more about the covers & benefits of each option?',
                                 () {
                               Navigator.push(

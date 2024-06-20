@@ -48,7 +48,16 @@ class PrefsData extends ChangeNotifier {
   }
 
   void updateQuestions(Map<String, dynamic> newQuestions) {
-    _questions = newQuestions;
+    print('questu=ions: $_questions');
+    _questions.forEach((key, value) {
+      print('key: $key');
+      print('key: $key');
+
+      if (newQuestions[key]['answer'] != null &&
+          value['answer'] != newQuestions[key]['answer'])
+        updateAnswer(key, newQuestions[key]['answer']);
+    });
+
     notifyListeners();
   }
 

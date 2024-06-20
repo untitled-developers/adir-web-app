@@ -97,7 +97,7 @@ class LoginApiClient {
     }
   }
 
-  Future<String> login(
+  Future<Map<String, dynamic>> login(
       {required String verificationCode,
       required int verificationId,
       required String name,
@@ -117,7 +117,8 @@ class LoginApiClient {
           method: "POST",
         ),
       );
-      return response.data['access_token'];
+      print('response: $response');
+      return response.data;
     } catch (error) {
       rethrow;
     }
