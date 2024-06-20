@@ -4,6 +4,7 @@ import 'package:adir_web_app/pages/questions_page/case_others/case_others_page.d
 import 'package:adir_web_app/pages/questions_page/done_page.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/covers_info_widget.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/description_widget.dart';
+import 'package:adir_web_app/pages/questions_page/widgets/footer_buttons.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/footer_widget.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/hello_im_lisa_widget.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/question_content_widget.dart';
@@ -67,107 +68,109 @@ class _QuestionsPageState extends State<QuestionsPage> {
       }
     }
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Description of the Risk'),
-      ),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Center(
-                child: Container(
-                  constraints: BoxConstraints(maxWidth: 500),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        helloImLisaWidget(),
-                        descriptionWidget(context, currentIndex),
-                        const SizedBox(height: 50),
-                        Text(
-                          currentQuestion['languages']['EN'],
-                          style: const TextStyle(fontSize: 24),
-                        ),
-                        const SizedBox(height: 20),
-                        currentQuestionKey == 'registrationnumber'
-                            ? Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  questionContentWidget(
-                                      context, currentQuestion, setState,
-                                      controller: currentController,
-                                      chosenYear: chosenYearOfMake,
-                                      enabled: enableSelection,
-                                      callCalendarBack: yearOfMakeCallBack),
-                                  const SizedBox(height: 50),
-                                  Text(
-                                    nextQuestion['languages']['EN'],
-                                    style: const TextStyle(fontSize: 24),
-                                  ),
-                                  const SizedBox(height: 20),
-                                  questionContentWidget(
-                                      context, nextQuestion, setState,
-                                      controller: nextController,
-                                      chosenYear: chosenYearOfMake,
-                                      enabled: enableSelection,
-                                      callCalendarBack: yearOfMakeCallBack),
-                                  const SizedBox(height: 50),
-                                ],
-                              )
-                            : questionContentWidget(
-                                context, currentQuestion, setState,
-                                controller: currentController,
-                                chosenYear: chosenYearOfMake,
-                                enabled: enableSelection,
-                                callCalendarBack: yearOfMakeCallBack),
-                        const SizedBox(height: 20),
-                        if (currentQuestionKey == 'insurancetype')
-                          footerWidget(
-                              'Do you want to know more about the covers & benefits of each option?',
-                              () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CoversInfoWidget()));
-                          }),
-                        if (showValidationMessage)
+        appBar: AppBar(
+          title: const Text('Description of the Risk'),
+        ),
+        body: isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Center(
+                  child: Container(
+                    constraints: BoxConstraints(maxWidth: 500),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          helloImLisaWidget(),
+                          descriptionWidget(context, currentIndex),
+                          const SizedBox(height: 50),
                           Text(
-                            'This question is required.',
-                            style: TextStyle(color: Colors.red),
+                            currentQuestion['languages']['EN'],
+                            style: const TextStyle(fontSize: 24),
                           ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Row(
-                              children: [
-                                if (currentIndex != 0)
-                                  TextButton(
-                                    onPressed: _previousQuestion,
-                                    child: const Text('Back'),
-                                  ),
-                                const SizedBox(width: 50),
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor:
-                                          Theme.of(context).primaryColor,
-                                      foregroundColor: Colors.white),
-                                  onPressed: _nextQuestion,
-                                  child: const Text('Next'),
-                                ),
-                              ],
+                          const SizedBox(height: 20),
+                          currentQuestionKey == 'registrationnumber'
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    questionContentWidget(
+                                        context, currentQuestion, setState,
+                                        controller: currentController,
+                                        chosenYear: chosenYearOfMake,
+                                        enabled: enableSelection,
+                                        callCalendarBack: yearOfMakeCallBack),
+                                    const SizedBox(height: 50),
+                                    Text(
+                                      nextQuestion['languages']['EN'],
+                                      style: const TextStyle(fontSize: 24),
+                                    ),
+                                    const SizedBox(height: 20),
+                                    questionContentWidget(
+                                        context, nextQuestion, setState,
+                                        controller: nextController,
+                                        chosenYear: chosenYearOfMake,
+                                        enabled: enableSelection,
+                                        callCalendarBack: yearOfMakeCallBack),
+                                    const SizedBox(height: 50),
+                                  ],
+                                )
+                              : questionContentWidget(
+                                  context, currentQuestion, setState,
+                                  controller: currentController,
+                                  chosenYear: chosenYearOfMake,
+                                  enabled: enableSelection,
+                                  callCalendarBack: yearOfMakeCallBack),
+                          const SizedBox(height: 20),
+                          if (currentQuestionKey == 'insurancetype')
+                            footerWidget(
+                                'Do you want to know more about the covers & benefits of each option?',
+                                () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CoversInfoWidget()));
+                            }),
+                          if (showValidationMessage)
+                            const Text(
+                              'This question is required.',
+                              style: TextStyle(color: Colors.red),
                             ),
-                          ],
-                        ),
-                      ],
+                          const SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Row(
+                                children: [
+                                  if (currentIndex != 0)
+                                    TextButton(
+                                      onPressed: _previousQuestion,
+                                      child: const Text('Back'),
+                                    ),
+                                  const SizedBox(width: 50),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                        backgroundColor:
+                                            Theme.of(context).primaryColor,
+                                        foregroundColor: Colors.white),
+                                    onPressed: _nextQuestion,
+                                    child: const Text('Next'),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 50),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-    );
+        floatingActionButton: footerButtons(context,
+            currentIndex == 0 || currentIndex == 1 || currentIndex == 2));
   }
 }

@@ -8,10 +8,7 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
       validateRequiredQuestions();
       return;
     }
-    if (currentIndex == 0 && currentQuestion['answer'] == 'Other') {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => CaseOthersPage()));
-    } else if (currentIndex == 7 && currentQuestion['answer'] == 'Fresh Card') {
+    if (currentIndex == 7 && currentQuestion['answer'] == 'Fresh Card') {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => LinkToPaymentGatewayPage()));
     } else if (currentIndex == 8) {

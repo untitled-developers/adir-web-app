@@ -22,11 +22,12 @@ extension QuestionsPageLogic on _QuestionsPageState {
       setState(() => showValidationMessage = true);
     } else {
       setState(() => showValidationMessage = false);
-      if (currentIndex == 2) {
+      if (currentIndex == 0 && currentQuestion['answer'] == 'Other') {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => CaseOthersPage()));
+      } else if (currentIndex == 2) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
-        print(
-            'testttt ${Provider.of<PrefsData>(context, listen: false).questions}');
       }
       currentIndex++;
     }
