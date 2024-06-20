@@ -15,18 +15,14 @@ extension VerificationPageCode on _VerificationPageState {
   _verifySMSCode(String pin) {
     DialogUtils.showProgressDialog(context);
 
-    Map<String, dynamic> initialQuestions = Map.fromEntries(
-        Provider.of<PrefsData>(context, listen: false)
-            .questions
-            .entries
-            .take(3));
-    print('testttt ${initialQuestions}');
     Session()
         .loginClient
         .login(
             verificationId: widget.verificationId,
             verificationCode: pin,
-            initialQuestions: initialQuestions)
+            name: widget.name ?? '',
+            payLoad: Provider.of<PrefsData>(context, listen: false).questions,
+            version: 1)
         .then((String token) async {
       var sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.remove('phoneNumberForVerification');

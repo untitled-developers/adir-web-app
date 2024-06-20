@@ -23,12 +23,14 @@ class VerificationPage extends StatefulWidget {
   final int verificationId;
   final String phoneNumber;
   final Map<String, dynamic> phoneVerification;
+  final String? name;
 
   const VerificationPage({
     Key? key,
     required this.verificationId,
     required this.phoneNumber,
     required this.phoneVerification,
+    this.name,
   }) : super(key: key);
 
   @override

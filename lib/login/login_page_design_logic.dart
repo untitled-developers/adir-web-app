@@ -13,6 +13,7 @@ extension LoginPageDesignLogic on _LoginPageState {
             phoneNumber: phoneNumberController.getParsedPhoneNumber(),
             verificationId: _verificationId,
             phoneVerification: phoneVerification,
+            name: nameController.text,
           ),
         ));
     if (validPhoneNumber == true) {
@@ -35,7 +36,7 @@ extension LoginPageDesignLogic on _LoginPageState {
                 phoneNumber: phoneNumberController.getParsedPhoneNumber(),
                 verificationId: _verificationId,
                 phoneVerification: phoneVerification,
-                //phoneVerification: phoneVerification,
+                name: nameController.text,
               ),
             ));
       }).catchError((error, stack) async {
@@ -58,6 +59,7 @@ extension LoginPageDesignLogic on _LoginPageState {
                     phoneNumber: phoneNumberController.getParsedPhoneNumber(),
                     verificationId: _verificationId,
                     phoneVerification: phoneVerification,
+                    name: nameController.text,
                   ),
                 ),
               );

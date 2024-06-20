@@ -1,5 +1,3 @@
-double allRisksPlusMinValue = 465.0;
-
 double getAllRisksPaymentValue(int yearOfMake, double carValue) {
   double allRisksMinValue = 465.0;
   double rate = 0.0;

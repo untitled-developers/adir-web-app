@@ -100,14 +100,18 @@ class LoginApiClient {
   Future<String> login(
       {required String verificationCode,
       required int verificationId,
-      required Map<String, dynamic> initialQuestions}) async {
+      required String name,
+      required int version,
+      required Map<String, dynamic> payLoad}) async {
     try {
       Response response = await _dio!.request(
         "/login",
         data: {
           'verification_code': verificationCode,
           'verification_id': verificationId,
-          'initial_Questions': initialQuestions
+          'name': name,
+          'version': version,
+          'payload': payLoad,
         },
         options: Options(
           method: "POST",
