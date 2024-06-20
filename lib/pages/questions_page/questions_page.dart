@@ -38,6 +38,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
   int yearOfMakeGap = 0;
   var currentQuestionKey;
   var currentQuestion;
+  dynamic nextQuestion;
 
   @override
   void initState() {
@@ -56,17 +57,10 @@ class _QuestionsPageState extends State<QuestionsPage> {
   Widget build(BuildContext context) {
     currentQuestionKey = keys?[currentIndex] ?? '';
     currentQuestion = allQuestions?[currentQuestionKey] ?? '';
-    dynamic nextQuestion;
     if (currentQuestionKey == 'registrationnumber') {
       nextQuestion = allQuestions?[keys?[currentIndex + 1]] ?? '';
     }
-
-    if (currentQuestion != null && currentQuestion.isNotEmpty) {
-      currentController.text = currentQuestion['answer'].toString();
-      if (currentQuestionKey == 'registrationnumber') {
-        nextController.text = nextQuestion['answer'].toString();
-      }
-    }
+    fillControllerText();
     return Scaffold(
         appBar: AppBar(
           title: const Text('Description of the Risk'),

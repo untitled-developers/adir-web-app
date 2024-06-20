@@ -32,4 +32,13 @@ extension QuestionsPageLogic on _QuestionsPageState {
       currentIndex++;
     }
   }
+
+  fillControllerText() {
+    if (currentQuestion != null && currentQuestion.isNotEmpty) {
+      currentController.text = currentQuestion['answer'].toString();
+      if (currentQuestionKey == 'registrationnumber') {
+        nextController.text = nextQuestion['answer'].toString();
+      }
+    }
+  }
 }
