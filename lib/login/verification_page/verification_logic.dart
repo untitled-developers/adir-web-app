@@ -76,22 +76,39 @@ extension VerificationPageCode on _VerificationPageState {
               body: const Text('An Error Occurred!'), onOk: () {});
         }
       });
+    }).catchError((error, stack) {
+      logger.e('Error', error: error, stackTrace: stack);
+      if (mounted) {
+        if (error is DioException && error.response != null) {
+          DialogUtils.showErrorDialog(context,
+              body: Text(
+                error.response!.data['message'],
+              ),
+              onOk: () => Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => QuestionsPage()),
+                  (route) => false));
+        } else {
+          DialogUtils.showErrorDialog(
+            context,
+            body: const Text("Error while editing info."),
+          );
+        }
+      }
     });
   }
 
   compareWithProviderData(Map<String, dynamic> submittedMap) {
     bool isDifferent = false;
-    print('ProviderQuestions: $providerQuestions');
     submittedMap.entries.take(3).forEach((entry) {
       if (providerQuestions[entry.key]['answer'] != null &&
           providerQuestions[entry.key]['answer'].toString().isNotEmpty) {
-        print('testt');
         if (entry.value['answer'].toString().isNotEmpty &&
             entry.value['answer'] != providerQuestions[entry.key]['answer']) {
           setState(() => isDifferent = true);
           DialogUtils.showNotifyDialog(
             context,
-            body: Text(
+            body: const Text(
                 "We've noticed that you have different answers for the first three initial questions, than the ones submitted before. Do you wish to update yoour answers, or keep the old ones?"),
             actions: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -126,7 +143,7 @@ extension VerificationPageCode on _VerificationPageState {
         }
       }
     });
-    print('IsDifferent: $isDifferent');
+
     if (!isDifferent) {
       Provider.of<PrefsData>(context, listen: false)
           .updateQuestions(submittedMap);
