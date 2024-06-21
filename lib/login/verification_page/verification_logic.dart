@@ -132,7 +132,7 @@ extension VerificationPageCode on _VerificationPageState {
                       style: TextButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColor,
                           foregroundColor: Colors.white),
-                      onPressed: onUpdateAnswers,
+                      onPressed: () => onUpdateAnswers(submittedMap),
                       child: const Text('Update my answers'),
                     ),
                   ],

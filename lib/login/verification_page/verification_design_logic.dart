@@ -62,8 +62,15 @@ extension VerificationPageDesignCode on _VerificationPageState {
         },
       );
 
-  onUpdateAnswers() {
-    //TODO send correct percentage
+  onUpdateAnswers(Map<String, dynamic> submittedMap) {
+    Map<String, dynamic> updatedMap = {};
+    providerQuestions.entries.take(3).forEach((entry) {
+      updatedMap[entry.key] = entry.value;
+    });
+
+    submittedMap.entries.skip(3).forEach((entry) {
+      updatedMap[entry.key] = entry.value;
+    });
     Map<String, dynamic> data = {
       "version": 1,
       "is_draft": true,
@@ -90,7 +97,7 @@ extension VerificationPageDesignCode on _VerificationPageState {
         } else {
           DialogUtils.showErrorDialog(
             context,
-            body: const Text("Error while editing info."),
+            body: const Text("Error while saving data."),
           );
         }
       }

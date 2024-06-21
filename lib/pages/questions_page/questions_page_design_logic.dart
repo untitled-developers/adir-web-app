@@ -4,11 +4,14 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
   void _nextQuestion() {
     Provider.of<PrefsData>(context, listen: false)
         .updateAnswer(currentQuestionKey, currentQuestion['answer']);
-    print('Saved map: ${ Provider.of<PrefsData>(context, listen: false).questions}');
+    print(
+        'Saved map: ${Provider.of<PrefsData>(context, listen: false).questions}');
     if (currentIndex == 0 || currentIndex == 1 || currentIndex == 2) {
       validateRequiredQuestions();
       return;
     }
+    submitQuestions();
+
     if (currentIndex == 7 && currentQuestion['answer'] == 'Fresh Card') {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => LinkToPaymentGatewayPage()));

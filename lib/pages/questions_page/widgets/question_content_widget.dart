@@ -1,6 +1,7 @@
 import 'package:adir_web_app/common/widgets/textField.dart';
 import 'package:flutter/material.dart';
 
+//TODO remove enabled if sure we dont need it any more
 Widget questionContentWidget(BuildContext context,
     Map<String, dynamic> question, Function(void Function()) setState,
     {TextEditingController? controller,
@@ -36,7 +37,7 @@ Widget questionContentWidget(BuildContext context,
         Container(
           width: 120,
           child: SwitchListTile(
-            value: question['answer'] == 1,
+            value: question['answer'].toString() == '1',
             onChanged: (value) {
               setState(() {
                 question['answer'] = value ? 1 : 0;
@@ -116,6 +117,7 @@ Widget questionContentWidget(BuildContext context,
           if (emailValid.hasMatch(controller!.text) == false) {
             return 'Invalid Email';
           }
+          question['answer'] = value;
           return null;
         },
         textInputAction: TextInputAction.next,

@@ -41,4 +41,36 @@ extension QuestionsPageLogic on _QuestionsPageState {
       }
     }
   }
+
+  submitQuestions() {
+    Map<String, dynamic> data = {
+      "version": 1,
+      "is_draft": true,
+      "form_finished_percentage": 20,
+      "payload": allQuestions,
+    };
+
+    Session()
+        .apiClient
+        .submissionsAPI
+        .submitQuestions(data)
+        .catchError((error, stack) {
+      logger.e('Error', error: error, stackTrace: stack);
+      if (mounted) {
+        if (error is DioException && error.response != null) {
+          DialogUtils.showErrorDialog(
+            context,
+            body: Text(
+              error.response!.data['message'],
+            ),
+          );
+        } else {
+          DialogUtils.showErrorDialog(
+            context,
+            body: const Text("Error while saving data."),
+          );
+        }
+      }
+    });
+  }
 }
