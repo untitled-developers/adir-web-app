@@ -1,3 +1,7 @@
+//Make sure that that the order, indices, and keys matter here.
+//Some pages depend on other using the index of a question
+//The first three questions should always be at the beginning of the map, in case you need to change that, please check the code
+
 Map<String, dynamic> staticQuestions = {
   'carbrand': {
     'languages': {'EN': "Car Brand", 'FR': '', 'AR': ''},

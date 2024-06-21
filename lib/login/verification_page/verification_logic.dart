@@ -43,14 +43,10 @@ extension VerificationPageCode on _VerificationPageState {
           if (!kIsWeb) {
             storage.write(key: 'accessToken', value: token);
           }
-          Map<String, dynamic> submittedQuestions = response['submission'];
-          print('SubmittedQuestions: $submittedQuestions');
-          Provider.of<PrefsData>(context, listen: false)
-              .updateQuestions(submittedQuestions);
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                  builder: (context) => const QuestionsPage(index: 3)),
-              (Route<dynamic> route) => false);
+          Map<String, dynamic> submittedQuestions =
+              jsonDecode(response['submission']['payload']);
+
+          compareWithProviderData(submittedQuestions);
         }
       }).catchError((error, stack) async {
         logger.e('Error', error: error, stackTrace: stack);
@@ -81,5 +77,63 @@ extension VerificationPageCode on _VerificationPageState {
         }
       });
     });
+  }
+
+  compareWithProviderData(Map<String, dynamic> submittedMap) {
+    bool isDifferent = false;
+    print('ProviderQuestions: $providerQuestions');
+    submittedMap.entries.take(3).forEach((entry) {
+      if (providerQuestions[entry.key]['answer'] != null &&
+          providerQuestions[entry.key]['answer'].toString().isNotEmpty) {
+        print('testt');
+        if (entry.value['answer'].toString().isNotEmpty &&
+            entry.value['answer'] != providerQuestions[entry.key]['answer']) {
+          setState(() => isDifferent = true);
+          DialogUtils.showNotifyDialog(
+            context,
+            body: Text(
+                "We've noticed that you have different answers for the first three initial questions, than the ones submitted before. Do you wish to update yoour answers, or keep the old ones?"),
+            actions: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Provider.of<PrefsData>(context, listen: false)
+                            .updateQuestions(submittedMap);
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const QuestionsPage(index: 3)),
+                            (Route<dynamic> route) => false);
+                      },
+                      child: const Text('Keep my old answers'),
+                    ),
+                    const SizedBox(width: 50),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          foregroundColor: Colors.white),
+                      onPressed: onUpdateAnswers,
+                      child: const Text('Update my answers'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        }
+      }
+    });
+    print('IsDifferent: $isDifferent');
+    if (!isDifferent) {
+      Provider.of<PrefsData>(context, listen: false)
+          .updateQuestions(submittedMap);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) => const QuestionsPage(index: 3)),
+          (Route<dynamic> route) => false);
+    }
   }
 }

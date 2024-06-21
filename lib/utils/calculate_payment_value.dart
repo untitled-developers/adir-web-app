@@ -12,7 +12,7 @@ double getAllRisksPaymentValue(int yearOfMake, double carValue) {
     } else if (yearOfMake >= 2000) {
       rate = 0.03;
     }
-  } else if (carValue >= 25001 && carValue <= 50000) {
+  } else if (carValue >= 25001) {
     if (yearOfMake >= 2021) {
       rate = 0.026;
     } else if (yearOfMake >= 2017) {
@@ -25,7 +25,9 @@ double getAllRisksPaymentValue(int yearOfMake, double carValue) {
   }
 
   double value = carValue * rate;
-  return rate > 0 && value <= allRisksMinValue ? allRisksMinValue : value;
+  return rate > 0 && value <= allRisksMinValue
+      ? allRisksMinValue
+      : value.ceilToDouble() + 10;
 }
 
 double getAllRisksPlusPaymentValue(int yearOfMake, double carValue) {
@@ -77,5 +79,5 @@ double getAllRisksPlusPaymentValue(int yearOfMake, double carValue) {
   double value = carValue * rate;
   return (rate > 0 && value <= allRisksPlusMinValue)
       ? allRisksPlusMinValue
-      : value;
+      : value.ceilToDouble() + 10;
 }

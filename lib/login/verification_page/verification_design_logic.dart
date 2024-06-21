@@ -61,4 +61,39 @@ extension VerificationPageDesignCode on _VerificationPageState {
           );
         },
       );
+
+  onUpdateAnswers() {
+    //TODO send correct percentage
+    Map<String, dynamic> data = {
+      "version": 1,
+      "is_draft": true,
+      "form_finished_percentage": 20,
+      "payload": providerQuestions,
+    };
+    Session().apiClient.submissionsAPI.submitQuestions(data).then((response) {
+      Provider.of<PrefsData>(context, listen: false)
+          .updateQuestions(providerQuestions);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) => const QuestionsPage(index: 3)),
+          (Route<dynamic> route) => false);
+    }).catchError((error, stack) {
+      logger.e('Error', error: error, stackTrace: stack);
+      if (mounted) {
+        if (error is DioException && error.response != null) {
+          DialogUtils.showErrorDialog(
+            context,
+            body: Text(
+              error.response!.data['message'],
+            ),
+          );
+        } else {
+          DialogUtils.showErrorDialog(
+            context,
+            body: const Text("Error while editing info."),
+          );
+        }
+      }
+    });
+  }
 }

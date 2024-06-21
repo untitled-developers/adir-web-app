@@ -4,6 +4,7 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
   void _nextQuestion() {
     Provider.of<PrefsData>(context, listen: false)
         .updateAnswer(currentQuestionKey, currentQuestion['answer']);
+    print('Saved map: ${ Provider.of<PrefsData>(context, listen: false).questions}');
     if (currentIndex == 0 || currentIndex == 1 || currentIndex == 2) {
       validateRequiredQuestions();
       return;

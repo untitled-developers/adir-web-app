@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:adir_web_app/api/session.dart';
 import 'package:adir_web_app/common/slide_route.dart';
@@ -43,6 +44,7 @@ class _VerificationPageState extends State<VerificationPage> {
   final TextEditingController _pinPutController = TextEditingController();
   bool finishedProfile = false;
   bool validPin = false;
+  Map<String, dynamic> providerQuestions = {};
 
   @override
   void initState() {
@@ -51,7 +53,8 @@ class _VerificationPageState extends State<VerificationPage> {
       value.setString('phoneNumberForVerification', widget.phoneNumber);
       value.setInt('idForVerification', widget.verificationId);
     });
-
+    providerQuestions =
+        Provider.of<PrefsData>(context, listen: false).questions;
     myDuration = Duration(
         seconds: DateTime.parse(widget.phoneVerification['next_request_at'])
             .difference(DateTime.now())

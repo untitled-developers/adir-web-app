@@ -1,15 +1,17 @@
+import 'package:adir_web_app/api/api_list/api_submissions.dart';
 import 'package:adir_web_app/api/api_list/api_users.dart';
 import 'package:adir_web_app/api/session.dart';
 import 'package:adir_web_app/main.dart';
 import 'package:dio/dio.dart';
 
-const domainUrl = "http://192.168.1.110:8000";
+const domainUrl = "http://192.168.1.105:8000";
 
 const baseUrl = "$domainUrl/api";
 
 class ApiClient {
   Dio? _dio;
   late final UsersAPI usersAPI;
+  late final SubmissionsAPI submissionsAPI;
 
   ApiClient() {
     BaseOptions options = BaseOptions(
@@ -46,6 +48,7 @@ class ApiClient {
 
   void initializeApiRequests() {
     usersAPI = UsersAPI(_dio!);
+    submissionsAPI = SubmissionsAPI(_dio!);
   }
 }
 

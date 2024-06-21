@@ -16,25 +16,35 @@ Widget footerWidget(BuildContext context, String text, Function() onButtonTap) {
     children: [
       Row(
         children: [
-          Text(
-              'In case you choose Motor All Risks, your total value will be: '),
-          Text('${allRisksValue.toString()}\$',
-              style: TextStyle(
-                  color: Colors.red,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18)),
+          const Expanded(
+            child: Text(
+                'In case you choose Motor All Risks, your total value will be: '),
+          ),
+          const SizedBox(width: 50),
+          Expanded(
+            child: Text('${allRisksValue.toString()}\$',
+                style: const TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18)),
+          ),
         ],
       ),
       const SizedBox(height: 10),
       Row(
         children: [
-          Text(
-              'In case you choose Motor All Risks Plus, your total value will be: '),
-          Text('${allRisksPlusValue.toString()}\$',
-              style: TextStyle(
-                  color: Colors.red,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18)),
+          const Expanded(
+            child: Text(
+                'In case you choose Motor All Risks Plus, your total value will be: '),
+          ),
+          const SizedBox(width: 50),
+          Expanded(
+            child: Text('${allRisksPlusValue.toString()}\$',
+                style: const TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18)),
+          ),
         ],
       ),
       const SizedBox(height: 40),
