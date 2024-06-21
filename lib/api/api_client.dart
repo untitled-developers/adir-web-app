@@ -4,7 +4,7 @@ import 'package:adir_web_app/api/session.dart';
 import 'package:adir_web_app/main.dart';
 import 'package:dio/dio.dart';
 
-const domainUrl = "http://192.168.1.105:8000";
+const domainUrl = "https://api.adiron.kockatoos.co";
 
 const baseUrl = "$domainUrl/api";
 
