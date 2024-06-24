@@ -2,13 +2,18 @@ part of 'questions_page.dart';
 
 extension QuestionsPageDesignLogic on _QuestionsPageState {
   void _nextQuestion() {
-    Provider.of<PrefsData>(context, listen: false)
-        .updateAnswer(currentQuestionKey, currentQuestion['answer']);
     if (currentIndex == 0 || currentIndex == 1 || currentIndex == 2) {
+      Provider.of<PrefsData>(context, listen: false)
+          .updateAnswer(currentQuestionKey, currentQuestion['answer']);
       validateRequiredQuestions();
       return;
     }
-    submitQuestions();
+    print('testtt ${currentQuestion['answer']} -- ${Provider.of<PrefsData>(context, listen: false)
+        .questions[currentQuestionKey]['answer']}');
+
+    if (currentQuestion['answer'] !=
+        Provider.of<PrefsData>(context, listen: false)
+            .questions[currentQuestionKey]['answer']) submitQuestions();
 
     if (currentIndex == 7 && currentQuestion['answer'] == 'Fresh Card') {
       Navigator.push(context,

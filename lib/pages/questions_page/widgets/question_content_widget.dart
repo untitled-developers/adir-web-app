@@ -1,5 +1,7 @@
 import 'package:adir_web_app/common/widgets/textField.dart';
+import 'package:adir_web_app/utils/prefs_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //TODO remove enabled if sure we dont need it any more
 Widget questionContentWidget(BuildContext context,
@@ -8,7 +10,7 @@ Widget questionContentWidget(BuildContext context,
     String? chosenYear,
     bool? enabled,
     bool? isValid,
-    Function? callCalendarBack}) {
+    String? key}) {
   if (question['value'] is List) {
     return Column(
       children: (question['value'] as List<dynamic>)
@@ -25,6 +27,8 @@ Widget questionContentWidget(BuildContext context,
                         : setState(() {
                             question['answer'] = value;
                           });
+                    print(
+                        'onCHanged ${question['answer']} -- ${Provider.of<PrefsData>(context, listen: false).questions[key]['answer']}');
                   },
                 ),
               ))

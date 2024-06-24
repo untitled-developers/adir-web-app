@@ -123,6 +123,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                   context, currentQuestion, setState,
                                   controller: currentController,
                                   chosenYear: chosenYearOfMake,
+                                  key: currentQuestionKey,
                                   enabled: enableSelection),
                           const SizedBox(height: 20),
                           if (currentQuestionKey == 'insurancetype')
