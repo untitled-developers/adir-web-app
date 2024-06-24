@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:adir_web_app/pages/verification_documents_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -61,7 +62,12 @@ class _MotorInsurancePageState extends State<MotorInsurancePage> {
                 itemBuilder: (context, index) => _buildImageTemplate(index),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(onPressed: () {}, child: const Text('Upload'))
+              ElevatedButton(
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => VerificationDocumentsPage())),
+                  child: const Text('Upload'))
             ],
           ),
         ),
