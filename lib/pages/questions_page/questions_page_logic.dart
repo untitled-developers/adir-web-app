@@ -68,7 +68,7 @@ extension QuestionsPageLogic on _QuestionsPageState {
 
     Map<String, dynamic> data = {
       "version": 1,
-      "is_draft": 1,
+      "is_draft": true,
       "question_key": currentQuestionKey,
       "answer_old_value": oldAnswer,
       "answer_new_value": allQuestions![currentQuestionKey],
