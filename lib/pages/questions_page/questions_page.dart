@@ -95,11 +95,13 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     questionContentWidget(
-                                        context, currentQuestion, setState,
-                                        controller: currentController,
-                                        chosenYear: chosenYearOfMake,
-                                        enabled: enableSelection,
-                                        callCalendarBack: yearOfMakeCallBack),
+                                      context,
+                                      currentQuestion,
+                                      setState,
+                                      controller: currentController,
+                                      chosenYear: chosenYearOfMake,
+                                      enabled: enableSelection,
+                                    ),
                                     const SizedBox(height: 50),
                                     Text(
                                       nextQuestion['languages']['EN'],
@@ -107,11 +109,13 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     ),
                                     const SizedBox(height: 20),
                                     questionContentWidget(
-                                        context, nextQuestion, setState,
-                                        controller: nextController,
-                                        chosenYear: chosenYearOfMake,
-                                        enabled: enableSelection,
-                                        callCalendarBack: yearOfMakeCallBack),
+                                      context,
+                                      nextQuestion,
+                                      setState,
+                                      controller: nextController,
+                                      chosenYear: chosenYearOfMake,
+                                      enabled: enableSelection,
+                                    ),
                                     const SizedBox(height: 50),
                                   ],
                                 )
@@ -119,8 +123,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                   context, currentQuestion, setState,
                                   controller: currentController,
                                   chosenYear: chosenYearOfMake,
-                                  enabled: enableSelection,
-                                  callCalendarBack: yearOfMakeCallBack),
+                                  enabled: enableSelection),
                           const SizedBox(height: 20),
                           if (currentQuestionKey == 'insurancetype')
                             footerWidget(context,
