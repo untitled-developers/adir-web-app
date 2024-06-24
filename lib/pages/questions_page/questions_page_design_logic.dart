@@ -19,22 +19,7 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
       RegExp emailValid = RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
       if (emailValid.hasMatch(currentController.text) == true) {
-        if (Provider.of<PrefsData>(context, listen: false)
-                .getFormFinishedPercentage() ==
-            100)
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => DonePage()),
-          );
-      } else {
-        DialogUtils.showNotifyDialog(
-          context,
-          actions: TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text('Okay')),
-          body: Text(
-              'Your form is still incomplete, please answer all the questions.'),
-        );
+        checkIfFormComplete();
       }
     } else {
       setState(() {
@@ -47,8 +32,7 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
                 nextController.text.isNotEmpty) currentIndex = currentIndex + 2;
           }
         } else {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => DonePage()));
+          checkIfFormComplete();
         }
       });
     }

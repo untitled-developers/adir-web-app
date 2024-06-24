@@ -33,6 +33,25 @@ extension QuestionsPageLogic on _QuestionsPageState {
     }
   }
 
+  checkIfFormComplete() {
+    if (Provider.of<PrefsData>(context, listen: false)
+            .getFormFinishedPercentage() ==
+        100) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => DonePage()),
+      );
+    } else {
+      DialogUtils.showNotifyDialog(
+        context,
+        actions: TextButton(
+            onPressed: () => Navigator.of(context).pop(), child: Text('Okay')),
+        body: Text(
+            'Your form is still incomplete, please answer all the questions.'),
+      );
+    }
+  }
+
   fillControllerText() {
     if (currentQuestion != null && currentQuestion.isNotEmpty) {
       currentController.text = currentQuestion['answer'].toString();
