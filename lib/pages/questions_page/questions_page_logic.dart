@@ -45,8 +45,9 @@ extension QuestionsPageLogic on _QuestionsPageState {
   submitQuestions() {
     Map<String, dynamic> data = {
       "version": 1,
-      "is_draft": true,
-      "form_finished_percentage": 20,
+      "is_draft": 1,
+      "form_finished_percentage": Provider.of<PrefsData>(context, listen: false)
+          .getFormFinishedPercentage(),
       "payload": allQuestions,
     };
 

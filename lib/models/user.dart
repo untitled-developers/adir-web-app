@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 class User {
   int? id;
   String? title;
+  double? formFinishedPercentage;
   String? firstName;
   String? fatherName;
   String? maidenName;
@@ -17,6 +18,9 @@ class User {
   User.fromMap(Map<String, dynamic> model) {
     id = model['id'];
     title = model['title'] ?? '';
+    formFinishedPercentage = model['form_finished_percentage'] != null
+        ? double.parse(model['form_finished_percentage'])
+        : 0;
     firstName = model['first_name'] ?? '';
     fatherName = model['father_name'] ?? '';
     maidenName = model['maiden_name'] ?? '';

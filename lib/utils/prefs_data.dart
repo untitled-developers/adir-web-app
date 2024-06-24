@@ -1,5 +1,6 @@
 import 'package:adir_web_app/common/questions.dart';
 import 'package:adir_web_app/models/user.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 class LocalizationPreference {
@@ -70,5 +71,19 @@ class PrefsData extends ChangeNotifier {
         ? _applicationPreferences.isDarkMode
         : _applicationPreferences.isDarkMode = false;
     notifyListeners();
+  }
+
+  int getFormFinishedPercentage() {
+    int totalQuestionsLength = _questions.length;
+    int answeredQuestionsLength = 0;
+
+    _questions.forEach((key, value) {
+      if (value['answer'] != null && value['answer'].toString().isNotEmpty) {
+        answeredQuestionsLength++;
+      }
+    });
+
+    return (answeredQuestionsLength.toDouble() / totalQuestionsLength * 100)
+        .toInt();
   }
 }
