@@ -21,7 +21,7 @@ class User {
     formFinishedPercentage = model['form_finished_percentage'] != null
         ? double.parse(model['form_finished_percentage'])
         : 0;
-    firstName = model['first_name'] ?? '';
+    firstName = model['name'] ?? '';
     fatherName = model['father_name'] ?? '';
     maidenName = model['maiden_name'] ?? '';
     familyName = model['family_name'] ?? '';

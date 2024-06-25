@@ -36,11 +36,14 @@ class _QuestionsPageState extends State<QuestionsPage> {
   TextEditingController currentController = TextEditingController();
   TextEditingController nextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  Map<String, dynamic>? allQuestions;
+
+  Map<String, dynamic>? localQuestions;
+
   String? chosenYearOfMake = '2024';
   bool enableSelection = true;
   int yearOfMakeGap = 0;
-  var currentQuestionKey;
+  late String currentQuestionKey;
+  late String nextQuestionKey;
   var currentQuestion;
   dynamic nextQuestion;
 
@@ -60,9 +63,16 @@ class _QuestionsPageState extends State<QuestionsPage> {
   @override
   Widget build(BuildContext context) {
     currentQuestionKey = keys?[currentIndex] ?? '';
-    currentQuestion = allQuestions?[currentQuestionKey] ?? '';
+    nextQuestionKey = currentQuestionKey == 'registrationnumber'
+        ? keys![currentIndex + 1]
+        : '';
+    Map<String, dynamic> localQuestion =
+        Map.from(localQuestions?[currentQuestionKey] ?? {});
+    currentQuestion = localQuestion;
     if (currentQuestionKey == 'registrationnumber') {
-      nextQuestion = allQuestions?[keys?[currentIndex + 1]] ?? '';
+      Map<String, dynamic> nextLocalQuestion =
+          Map.from(localQuestions?[nextQuestionKey] ?? {});
+      nextQuestion = nextLocalQuestion;
     }
     fillControllerText();
     return Scaffold(
@@ -97,7 +107,6 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     questionContentWidget(
                                       context,
                                       currentQuestion,
-                                      setState,
                                       controller: currentController,
                                       chosenYear: chosenYearOfMake,
                                       enabled: enableSelection,
@@ -111,7 +120,6 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     questionContentWidget(
                                       context,
                                       nextQuestion,
-                                      setState,
                                       controller: nextController,
                                       chosenYear: chosenYearOfMake,
                                       enabled: enableSelection,
@@ -119,8 +127,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     const SizedBox(height: 50),
                                   ],
                                 )
-                              : questionContentWidget(
-                                  context, currentQuestion, setState,
+                              : questionContentWidget(context, currentQuestion,
                                   controller: currentController,
                                   chosenYear: chosenYearOfMake,
                                   key: currentQuestionKey,
@@ -147,7 +154,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                             children: <Widget>[
                               Row(
                                 children: [
-                                  if (currentIndex != 0)
+                                  if (currentIndex != 0 && currentIndex != 3)
                                     TextButton(
                                       onPressed: _previousQuestion,
                                       child: const Text('Back'),

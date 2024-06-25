@@ -5,11 +5,19 @@ extension QuestionsPageLogic on _QuestionsPageState {
     if (widget.index != null) {
       currentIndex = widget.index!;
     }
-    allQuestions = {};
-    Map<String, dynamic> localAllQuestions = Map<String, dynamic>.from(
-        Provider.of<PrefsData>(context, listen: false).questions);
-    allQuestions = Map<String, dynamic>.from(localAllQuestions);
-    keys = allQuestions?.keys.toList();
+
+    localQuestions = {};
+    localQuestions?.addAll(
+      Map.fromEntries(
+        Provider.of<PrefsData>(context, listen: false).questions.entries.map(
+              (entry) => MapEntry(
+                entry.key,
+                entry.value,
+              ),
+            ),
+      ),
+    );
+    keys = localQuestions?.keys.toList();
     setState(() => isLoading = false);
   }
 
@@ -26,7 +34,7 @@ extension QuestionsPageLogic on _QuestionsPageState {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
       }
-      currentIndex++;
+      if (currentIndex != 2) currentIndex++;
     }
   }
 
@@ -59,24 +67,42 @@ extension QuestionsPageLogic on _QuestionsPageState {
   }
 
   submitQuestions() {
-    print('testtt $currentQuestion');
-    String oldAnswer = Provider.of<PrefsData>(context, listen: false)
-        .questions[currentQuestionKey]['answer']
-        .toString();
-    Provider.of<PrefsData>(context, listen: false)
-        .updateAnswer(currentQuestionKey, currentQuestion['answer']);
+    if (currentQuestion['answer'] !=
+        Provider.of<PrefsData>(context, listen: false)
+            .questions[currentQuestionKey]['answer']) {
+      String oldAnswer = Provider.of<PrefsData>(context, listen: false)
+          .questions[currentQuestionKey]['answer']
+          .toString();
+      submitRequest(currentQuestionKey.toString(), oldAnswer.toString(),
+          currentQuestion['answer'].toString());
+    }
+    if (currentQuestionKey == 'registrationnumber' &&
+        nextQuestion['answer'] !=
+            Provider.of<PrefsData>(context, listen: false)
+                .questions[nextQuestionKey]['answer']) {
+      String oldAnswer = Provider.of<PrefsData>(context, listen: false)
+          .questions[nextQuestionKey]['answer']
+          .toString();
 
+      submitRequest(nextQuestionKey.toString(), oldAnswer.toString(),
+          nextQuestion['answer'].toString());
+    }
+  }
+
+  submitRequest(String questionKey, String oldAnswer, String newAnswer) {
+    Provider.of<PrefsData>(context, listen: false)
+        .updateAnswer(questionKey, newAnswer);
     Map<String, dynamic> data = {
       "version": 1,
       "is_draft": true,
-      "question_key": currentQuestionKey,
+      "question_key": questionKey,
       "answer_old_value": oldAnswer,
-      "answer_new_value": allQuestions![currentQuestionKey],
+      "answer_new_value": newAnswer.isNotEmpty ? newAnswer : null,
       "form_finished_percentage": Provider.of<PrefsData>(context, listen: false)
           .getFormFinishedPercentage(),
-      "payload": allQuestions,
+      "payload": localQuestions,
     };
-
+    print('Data: $data');
     Session()
         .apiClient
         .submissionsAPI
