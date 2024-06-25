@@ -67,7 +67,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
     fillControllerText();
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Description of the Risk'),
+          title: const Text('Description of the Risk (Demo)'),
         ),
         body: isLoading
             ? const Center(child: CircularProgressIndicator())
