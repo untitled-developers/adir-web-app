@@ -62,7 +62,9 @@ class PrefsData extends ChangeNotifier {
   }
 
   void updateAnswer(String key, dynamic answer) {
-    _questions[key]['answer'] = answer;
+    Map<String, dynamic> updatedQuestions = Map.from(_questions);
+    updatedQuestions[key]['answer'] = answer;
+    _questions = updatedQuestions;
     notifyListeners();
   }
 

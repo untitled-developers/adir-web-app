@@ -36,7 +36,9 @@ class _QuestionsPageState extends State<QuestionsPage> {
   TextEditingController currentController = TextEditingController();
   TextEditingController nextController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  Map<String, dynamic>? allQuestions;
+
+  Map<String, dynamic>? localQuestions;
+
   String? chosenYearOfMake = '2024';
   bool enableSelection = true;
   int yearOfMakeGap = 0;
@@ -60,9 +62,12 @@ class _QuestionsPageState extends State<QuestionsPage> {
   @override
   Widget build(BuildContext context) {
     currentQuestionKey = keys?[currentIndex] ?? '';
-    currentQuestion = allQuestions?[currentQuestionKey] ?? '';
+    Map<String, dynamic> localQuestion =
+        Map.from(localQuestions?[currentQuestionKey] ?? {});
+
+    currentQuestion = localQuestion ?? '';
     if (currentQuestionKey == 'registrationnumber') {
-      nextQuestion = allQuestions?[keys?[currentIndex + 1]] ?? '';
+      nextQuestion = localQuestions?[keys?[currentIndex + 1]] ?? '';
     }
     fillControllerText();
     return Scaffold(
@@ -97,7 +102,6 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     questionContentWidget(
                                       context,
                                       currentQuestion,
-                                      setState,
                                       controller: currentController,
                                       chosenYear: chosenYearOfMake,
                                       enabled: enableSelection,
@@ -111,7 +115,6 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     questionContentWidget(
                                       context,
                                       nextQuestion,
-                                      setState,
                                       controller: nextController,
                                       chosenYear: chosenYearOfMake,
                                       enabled: enableSelection,
@@ -119,8 +122,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                     const SizedBox(height: 50),
                                   ],
                                 )
-                              : questionContentWidget(
-                                  context, currentQuestion, setState,
+                              : questionContentWidget(context, currentQuestion,
                                   controller: currentController,
                                   chosenYear: chosenYearOfMake,
                                   key: currentQuestionKey,

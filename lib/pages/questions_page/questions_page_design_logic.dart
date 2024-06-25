@@ -8,8 +8,6 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
       validateRequiredQuestions();
       return;
     }
-    print('testtt ${currentQuestion['answer']} -- ${Provider.of<PrefsData>(context, listen: false)
-        .questions[currentQuestionKey]['answer']}');
 
     if (currentQuestion['answer'] !=
         Provider.of<PrefsData>(context, listen: false)

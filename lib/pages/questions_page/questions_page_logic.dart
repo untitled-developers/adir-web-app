@@ -5,11 +5,19 @@ extension QuestionsPageLogic on _QuestionsPageState {
     if (widget.index != null) {
       currentIndex = widget.index!;
     }
-    allQuestions = {};
-    Map<String, dynamic> localAllQuestions = Map<String, dynamic>.from(
-        Provider.of<PrefsData>(context, listen: false).questions);
-    allQuestions = Map<String, dynamic>.from(localAllQuestions);
-    keys = allQuestions?.keys.toList();
+
+    localQuestions = {};
+    localQuestions?.addAll(
+      Map.fromEntries(
+        Provider.of<PrefsData>(context, listen: false).questions.entries.map(
+              (entry) => MapEntry(
+                entry.key,
+                entry.value,
+              ),
+            ),
+      ),
+    );
+    keys = localQuestions?.keys.toList();
     setState(() => isLoading = false);
   }
 
@@ -59,7 +67,6 @@ extension QuestionsPageLogic on _QuestionsPageState {
   }
 
   submitQuestions() {
-    print('testtt $currentQuestion');
     String oldAnswer = Provider.of<PrefsData>(context, listen: false)
         .questions[currentQuestionKey]['answer']
         .toString();
@@ -69,12 +76,12 @@ extension QuestionsPageLogic on _QuestionsPageState {
     Map<String, dynamic> data = {
       "version": 1,
       "is_draft": true,
-      "question_key": currentQuestionKey,
-      "answer_old_value": oldAnswer,
-      "answer_new_value": allQuestions![currentQuestionKey],
+      "question_key": currentQuestionKey.toString(),
+      "answer_old_value": oldAnswer.toString(),
+      "answer_new_value": localQuestions![currentQuestionKey].toString(),
       "form_finished_percentage": Provider.of<PrefsData>(context, listen: false)
           .getFormFinishedPercentage(),
-      "payload": allQuestions,
+      "payload": localQuestions,
     };
 
     Session()
