@@ -9,9 +9,7 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
       return;
     }
 
-    if (currentQuestion['answer'] !=
-        Provider.of<PrefsData>(context, listen: false)
-            .questions[currentQuestionKey]['answer']) submitQuestions();
+    submitQuestions();
 
     if (currentIndex == 7 && currentQuestion['answer'] == 'Fresh Card') {
       Navigator.push(context,

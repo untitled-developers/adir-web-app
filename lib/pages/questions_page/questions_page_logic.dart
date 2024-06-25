@@ -67,18 +67,38 @@ extension QuestionsPageLogic on _QuestionsPageState {
   }
 
   submitQuestions() {
-    String oldAnswer = Provider.of<PrefsData>(context, listen: false)
-        .questions[currentQuestionKey]['answer']
-        .toString();
-    Provider.of<PrefsData>(context, listen: false)
-        .updateAnswer(currentQuestionKey, currentQuestion['answer']);
+    if (currentQuestion['answer'] !=
+        Provider.of<PrefsData>(context, listen: false)
+            .questions[currentQuestionKey]['answer']) {
+      String oldAnswer = Provider.of<PrefsData>(context, listen: false)
+          .questions[currentQuestionKey]['answer']
+          .toString();
 
+      submitRequest(currentQuestionKey.toString(), oldAnswer.toString(),
+          localQuestions![currentQuestionKey].toString());
+    }
+    if (currentQuestionKey == 'registrationnumber' &&
+        nextQuestion['answer'] !=
+            Provider.of<PrefsData>(context, listen: false)
+                .questions[nextQuestionKey]['answer']) {
+      String oldAnswer = Provider.of<PrefsData>(context, listen: false)
+          .questions[nextQuestionKey]['answer']
+          .toString();
+
+      submitRequest(nextQuestionKey.toString(), oldAnswer.toString(),
+          localQuestions![nextQuestionKey].toString());
+    }
+  }
+
+  submitRequest(String questionKey, String oldAnswer, String newAnswer) {
+    Provider.of<PrefsData>(context, listen: false)
+        .updateAnswer(nextQuestionKey, nextQuestion['answer']);
     Map<String, dynamic> data = {
       "version": 1,
       "is_draft": true,
-      "question_key": currentQuestionKey.toString(),
-      "answer_old_value": oldAnswer.toString(),
-      "answer_new_value": localQuestions![currentQuestionKey].toString(),
+      "question_key": questionKey,
+      "answer_old_value": oldAnswer,
+      "answer_new_value": newAnswer,
       "form_finished_percentage": Provider.of<PrefsData>(context, listen: false)
           .getFormFinishedPercentage(),
       "payload": localQuestions,

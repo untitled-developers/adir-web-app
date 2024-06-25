@@ -42,7 +42,8 @@ class _QuestionsPageState extends State<QuestionsPage> {
   String? chosenYearOfMake = '2024';
   bool enableSelection = true;
   int yearOfMakeGap = 0;
-  var currentQuestionKey;
+  late String currentQuestionKey;
+  late String nextQuestionKey;
   var currentQuestion;
   dynamic nextQuestion;
 
@@ -62,12 +63,14 @@ class _QuestionsPageState extends State<QuestionsPage> {
   @override
   Widget build(BuildContext context) {
     currentQuestionKey = keys?[currentIndex] ?? '';
+    nextQuestionKey = keys?[currentIndex + 1] ?? '';
     Map<String, dynamic> localQuestion =
         Map.from(localQuestions?[currentQuestionKey] ?? {});
-
-    currentQuestion = localQuestion ?? '';
+    currentQuestion = localQuestion;
     if (currentQuestionKey == 'registrationnumber') {
-      nextQuestion = localQuestions?[keys?[currentIndex + 1]] ?? '';
+      Map<String, dynamic> nextLocalQuestion =
+          Map.from(localQuestions?[nextQuestionKey] ?? {});
+      nextQuestion = nextLocalQuestion;
     }
     fillControllerText();
     return Scaffold(
