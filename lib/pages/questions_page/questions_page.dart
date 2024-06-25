@@ -63,7 +63,9 @@ class _QuestionsPageState extends State<QuestionsPage> {
   @override
   Widget build(BuildContext context) {
     currentQuestionKey = keys?[currentIndex] ?? '';
-    nextQuestionKey = keys?[currentIndex + 1] ?? '';
+    nextQuestionKey = currentQuestionKey == 'registrationnumber'
+        ? keys![currentIndex + 1]
+        : '';
     Map<String, dynamic> localQuestion =
         Map.from(localQuestions?[currentQuestionKey] ?? {});
     currentQuestion = localQuestion;
@@ -152,7 +154,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                             children: <Widget>[
                               Row(
                                 children: [
-                                  if (currentIndex != 0)
+                                  if (currentIndex != 0 && currentIndex != 3)
                                     TextButton(
                                       onPressed: _previousQuestion,
                                       child: const Text('Back'),

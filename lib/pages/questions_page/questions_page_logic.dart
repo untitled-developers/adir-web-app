@@ -34,7 +34,7 @@ extension QuestionsPageLogic on _QuestionsPageState {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
       }
-      currentIndex++;
+      if (currentIndex != 2) currentIndex++;
     }
   }
 
@@ -73,7 +73,6 @@ extension QuestionsPageLogic on _QuestionsPageState {
       String oldAnswer = Provider.of<PrefsData>(context, listen: false)
           .questions[currentQuestionKey]['answer']
           .toString();
-
       submitRequest(currentQuestionKey.toString(), oldAnswer.toString(),
           currentQuestion['answer'].toString());
     }
@@ -98,7 +97,7 @@ extension QuestionsPageLogic on _QuestionsPageState {
       "is_draft": true,
       "question_key": questionKey,
       "answer_old_value": oldAnswer,
-      "answer_new_value": newAnswer,
+      "answer_new_value": newAnswer.isNotEmpty ? newAnswer : null,
       "form_finished_percentage": Provider.of<PrefsData>(context, listen: false)
           .getFormFinishedPercentage(),
       "payload": localQuestions,

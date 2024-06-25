@@ -28,13 +28,16 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
           } else if (currentIndex == 5) {
             _formKey.currentState!.validate();
             if (currentController.text.isNotEmpty ||
-                nextController.text.isNotEmpty) currentIndex = currentIndex + 2;
+                nextController.text.isNotEmpty) {
+              currentIndex = currentIndex + 2;
+            }
           }
         } else {
           checkIfFormComplete();
         }
       });
     }
+
     currentController = TextEditingController();
   }
 

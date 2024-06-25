@@ -85,6 +85,17 @@ class PrefsData extends ChangeNotifier {
       }
     });
 
+    if (answeredQuestionsLength == totalQuestionsLength - 1 &&
+        ((_questions['registrationnumber']['answer'] != null &&
+                _questions['registrationnumber']['answer']
+                    .toString()
+                    .isEmpty) ||
+            (_questions['chassisnumber']['answer'] != null &&
+                _questions['chassisnumber']['answer'].toString().isEmpty))) {
+      print('testt');
+      return 100;
+    }
+
     return (answeredQuestionsLength.toDouble() / totalQuestionsLength * 100)
         .toInt();
   }
