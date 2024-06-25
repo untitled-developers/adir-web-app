@@ -75,7 +75,7 @@ extension QuestionsPageLogic on _QuestionsPageState {
           .toString();
 
       submitRequest(currentQuestionKey.toString(), oldAnswer.toString(),
-          localQuestions![currentQuestionKey].toString());
+          currentQuestion['answer'].toString());
     }
     if (currentQuestionKey == 'registrationnumber' &&
         nextQuestion['answer'] !=
@@ -86,13 +86,13 @@ extension QuestionsPageLogic on _QuestionsPageState {
           .toString();
 
       submitRequest(nextQuestionKey.toString(), oldAnswer.toString(),
-          localQuestions![nextQuestionKey].toString());
+          nextQuestion['answer'].toString());
     }
   }
 
   submitRequest(String questionKey, String oldAnswer, String newAnswer) {
     Provider.of<PrefsData>(context, listen: false)
-        .updateAnswer(nextQuestionKey, nextQuestion['answer']);
+        .updateAnswer(questionKey, newAnswer);
     Map<String, dynamic> data = {
       "version": 1,
       "is_draft": true,
@@ -103,7 +103,7 @@ extension QuestionsPageLogic on _QuestionsPageState {
           .getFormFinishedPercentage(),
       "payload": localQuestions,
     };
-
+    print('Data: $data');
     Session()
         .apiClient
         .submissionsAPI
