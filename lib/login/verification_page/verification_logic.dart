@@ -125,15 +125,17 @@ extension VerificationPageCode on _VerificationPageState {
                                     const QuestionsPage(index: 3)),
                             (Route<dynamic> route) => false);
                       },
-                      child: const Text('Keep my old answers'),
+                      child: const Text('Keep my old answers',
+                          style: TextStyle(fontSize: 12)),
                     ),
-                    const SizedBox(width: 50),
+                    const SizedBox(width: 10),
                     TextButton(
                       style: TextButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColor,
                           foregroundColor: Colors.white),
                       onPressed: () => onUpdateAnswers(submittedMap),
-                      child: const Text('Update my answers'),
+                      child: const Text('Update my answers',
+                          style: TextStyle(fontSize: 12)),
                     ),
                   ],
                 ),

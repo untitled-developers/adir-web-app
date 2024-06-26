@@ -26,31 +26,28 @@ class DialogUtils {
       showDialog<void>(
         context: context, // user must tap button!
         builder: (BuildContext context) {
-          return Container(
-            constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.7),
-            child: AlertDialog(
-              title: title ?? const Text("Alert"),
-              content: actions != null
-                  ? SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SingleChildScrollView(
-                            child: body,
-                          ),
-                          const SizedBox(height: 24),
-                          actions
-                        ],
-                      ),
-                    )
-                  : SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: SingleChildScrollView(child: body)),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6)),
-            ),
+          return AlertDialog(
+            title: title ?? const Text("Alert"),
+            content: actions != null
+                ? Container(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SingleChildScrollView(
+                          child: body,
+                        ),
+                        const SizedBox(height: 24),
+                        actions
+                      ],
+                    ),
+                  )
+                : SizedBox(
+                    //width: MediaQuery.of(context).size.width * 0.9,
+                    child: SingleChildScrollView(child: body)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           );
         },
       );
