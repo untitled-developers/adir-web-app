@@ -15,6 +15,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_html/html.dart';
@@ -96,6 +97,9 @@ class _LoginPageState extends State<LoginPage> {
                                   keyboardType: TextInputType.phone,
                                   style: const TextStyle(color: Colors.black),
                                   cursorHeight: 20,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly,
+                                  ],
                                   cursorColor: Theme.of(context).primaryColor,
                                   onChanged: onMobileTextChange,
                                   onEditingComplete: onEditingComplete,

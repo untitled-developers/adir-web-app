@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 Widget textField(
     {required String label,
     required TextEditingController controller,
     String? errorMessage,
     TextInputType? inputType,
+    bool? isDigitsOnly,
     Widget? suffixIcon,
     bool? enabled,
     Function(String)? onChanged,
@@ -16,6 +18,12 @@ Widget textField(
       autovalidateMode: isValid != null && !isValid
           ? AutovalidateMode.always
           : AutovalidateMode.onUserInteraction,
+      keyboardType: inputType ?? TextInputType.text,
+      inputFormatters: isDigitsOnly == true
+          ? <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly,
+            ]
+          : null,
       validator: (value) {
         if ((value == null || value.isEmpty)) {
           return "Can't be empty";
@@ -28,7 +36,6 @@ Widget textField(
       onChanged: onChanged,
       enabled: enabled ?? true,
       controller: controller,
-      keyboardType: inputType ?? TextInputType.text,
       decoration: InputDecoration(
         filled: true,
         suffixText: label == 'Weight' ? 'KG' : '',
