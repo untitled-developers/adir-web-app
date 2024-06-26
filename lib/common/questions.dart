@@ -32,7 +32,7 @@ Map<String, dynamic> staticQuestions = {
   'elzemeh': {
     'languages': {'EN': "Elzemeh", 'FR': '', 'AR': ''},
     'value': 'bool',
-    'answer': ''
+    'answer': '0'
   },
   'registrationnumber': {
     'languages': {'EN': "Registration Number", 'FR': '', 'AR': ''},

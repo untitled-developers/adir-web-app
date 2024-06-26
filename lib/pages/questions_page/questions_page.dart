@@ -124,7 +124,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                       chosenYear: chosenYearOfMake,
                                       enabled: enableSelection,
                                     ),
-                                    const SizedBox(height: 50),
+                                    const SizedBox(height: 20),
                                   ],
                                 )
                               : questionContentWidget(context, currentQuestion,
