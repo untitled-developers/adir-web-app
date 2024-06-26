@@ -5,14 +5,17 @@ import 'package:adir_web_app/common/slide_route.dart';
 import 'package:adir_web_app/common/widgets/textField.dart';
 import 'package:adir_web_app/login/verification_page/verification_page.dart';
 import 'package:adir_web_app/main.dart';
+import 'package:adir_web_app/pages/questions_page/questions_page.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/description_widget.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/hello_im_lisa_widget.dart';
 import 'package:adir_web_app/utils/dialog_utils.dart';
 import 'package:adir_web_app/utils/phone_field_controller.dart';
+import 'package:adir_web_app/utils/prefs_data.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_html/html.dart';
 
@@ -147,7 +150,13 @@ class _LoginPageState extends State<LoginPage> {
                         Row(
                           children: [
                             TextButton(
-                              onPressed: () => Navigator.of(context).pop(),
+                              onPressed: () => areInitialAnswersEmpty()
+                                  ? Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              QuestionsPage(index: 0)))
+                                  : Navigator.of(context).pop(),
                               child: const Text('Back'),
                             ),
                             const SizedBox(width: 50),

@@ -26,4 +26,20 @@ extension LoginPageLogic on _LoginPageState {
       }
     }
   }
+
+  bool areInitialAnswersEmpty() {
+    if (Provider.of<PrefsData>(context, listen: false)
+            .questions['carbrand']['answer']
+            .toString()
+            .isEmpty ||
+        Provider.of<PrefsData>(context, listen: false)
+            .questions['carvalue']['answer']
+            .toString()
+            .isEmpty ||
+        Provider.of<PrefsData>(context, listen: false)
+            .questions['yearofmake']['answer']
+            .toString()
+            .isEmpty) return true;
+    return false;
+  }
 }
