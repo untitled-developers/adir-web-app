@@ -4,7 +4,6 @@ import 'package:adir_web_app/api/session.dart';
 import 'package:adir_web_app/common/slide_route.dart';
 import 'package:adir_web_app/models/user.dart';
 import 'package:adir_web_app/pages/home_page.dart';
-import 'package:adir_web_app/pages/motor_insurance_page.dart';
 import 'package:adir_web_app/pages/questions_page/questions_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -107,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (mounted) {
         Navigator.of(context).pushAndRemoveUntil(
           SlideRoute(
-            page: const MotorInsurancePage(),
+            page: const QuestionsPage(),
           ),
           (route) => false,
         );

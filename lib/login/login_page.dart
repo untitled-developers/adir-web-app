@@ -153,9 +153,13 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () => areInitialAnswersEmpty()
                                   ? Navigator.pushReplacement(
                                       context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              QuestionsPage(index: 0)))
+                                      PageRouteBuilder(
+                                          pageBuilder: (context, animation1,
+                                                  animation2) =>
+                                              QuestionsPage(index: 0),
+                                          transitionDuration: Duration.zero,
+                                          reverseTransitionDuration:
+                                              Duration.zero))
                                   : Navigator.of(context).pop(),
                               child: const Text('Back'),
                             ),

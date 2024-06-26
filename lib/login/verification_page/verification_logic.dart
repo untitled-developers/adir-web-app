@@ -86,7 +86,11 @@ extension VerificationPageCode on _VerificationPageState {
               ),
               onOk: () => Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => QuestionsPage()),
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          QuestionsPage(),
+                      transitionDuration: Duration.zero,
+                      reverseTransitionDuration: Duration.zero),
                   (route) => false));
         } else {
           DialogUtils.showErrorDialog(
@@ -120,9 +124,14 @@ extension VerificationPageCode on _VerificationPageState {
                         Provider.of<PrefsData>(context, listen: false)
                             .updateQuestions(submittedMap);
                         Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const QuestionsPage(index: 3)),
+                            PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation1, animation2) =>
+                                        QuestionsPage(
+                                          index: 3,
+                                        ),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero),
                             (Route<dynamic> route) => false);
                       },
                       child: const Text('Keep my old answers',
@@ -150,8 +159,12 @@ extension VerificationPageCode on _VerificationPageState {
       Provider.of<PrefsData>(context, listen: false)
           .updateQuestions(submittedMap);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const QuestionsPage(index: 3)),
+          PageRouteBuilder(
+              pageBuilder: (context, animation1, animation2) => QuestionsPage(
+                    index: 3,
+                  ),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero),
           (Route<dynamic> route) => false);
     }
   }

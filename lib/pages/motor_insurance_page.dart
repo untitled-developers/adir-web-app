@@ -71,9 +71,11 @@ class _MotorInsurancePageState extends State<MotorInsurancePage> {
                   ElevatedButton(
                       onPressed: () => Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  VerificationDocumentsPage())),
+                          PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  VerificationDocumentsPage(),
+                              transitionDuration: Duration.zero,
+                              reverseTransitionDuration: Duration.zero)),
                       child: const Text('Upload'))
                 ],
               ),

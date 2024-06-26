@@ -139,9 +139,13 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                 () {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CoversInfoWidget()));
+                                  PageRouteBuilder(
+                                      pageBuilder:
+                                          (context, animation1, animation2) =>
+                                              CoversInfoWidget(),
+                                      transitionDuration: Duration.zero,
+                                      reverseTransitionDuration:
+                                          Duration.zero));
                             }),
                           if (showValidationMessage)
                             const Text(

@@ -16,8 +16,13 @@ Widget footerButtons(BuildContext context, bool showContinueYourJourney) {
                   .updateAnswer('carvalue', '');
               Provider.of<PrefsData>(context, listen: false)
                   .updateAnswer('yearofmake', '');
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
+              Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          LoginPage(),
+                      transitionDuration: Duration.zero,
+                      reverseTransitionDuration: Duration.zero));
             },
             child: Text('Continue Your Journey')),
       TextButton(onPressed: () {}, child: Text('Contact Us')),

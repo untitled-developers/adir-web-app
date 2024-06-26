@@ -81,8 +81,12 @@ extension VerificationPageDesignCode on _VerificationPageState {
       Provider.of<PrefsData>(context, listen: false)
           .updateQuestions(providerQuestions);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (context) => const QuestionsPage(index: 3)),
+          PageRouteBuilder(
+              pageBuilder: (context, animation1, animation2) => QuestionsPage(
+                    index: 3,
+                  ),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero),
           (Route<dynamic> route) => false);
     }).catchError((error, stack) {
       logger.e('Error', error: error, stackTrace: stack);
