@@ -5,7 +5,7 @@ extension LoginPageLogic on _LoginPageState {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
 
     if (kIsWeb) {
-      final userAgent = window.navigator.userAgent.toLowerCase();
+      final userAgent = html.window.navigator.userAgent.toLowerCase();
       if (userAgent.contains('android')) {
         return 'Android Device';
       } else if (userAgent.contains('iphone') || userAgent.contains('ipad')) {

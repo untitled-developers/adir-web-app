@@ -183,6 +183,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                   ),
                 ),
               ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: footerButtons(context,
             currentIndex == 0 || currentIndex == 1 || currentIndex == 2));
   }
