@@ -5,7 +5,7 @@ extension LoginPageLogic on _LoginPageState {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
 
     if (kIsWeb) {
-      final userAgent = window.navigator.userAgent.toLowerCase();
+      final userAgent = html.window.navigator.userAgent.toLowerCase();
       if (userAgent.contains('android')) {
         return 'Android Device';
       } else if (userAgent.contains('iphone') || userAgent.contains('ipad')) {
@@ -25,5 +25,21 @@ extension LoginPageLogic on _LoginPageState {
         return 'Unknown Device';
       }
     }
+  }
+
+  bool areInitialAnswersEmpty() {
+    if (Provider.of<PrefsData>(context, listen: false)
+            .questions['carbrand']['answer']
+            .toString()
+            .isEmpty ||
+        Provider.of<PrefsData>(context, listen: false)
+            .questions['carvalue']['answer']
+            .toString()
+            .isEmpty ||
+        Provider.of<PrefsData>(context, listen: false)
+            .questions['yearofmake']['answer']
+            .toString()
+            .isEmpty) return true;
+    return false;
   }
 }

@@ -5,16 +5,20 @@ import 'package:adir_web_app/common/slide_route.dart';
 import 'package:adir_web_app/common/widgets/textField.dart';
 import 'package:adir_web_app/login/verification_page/verification_page.dart';
 import 'package:adir_web_app/main.dart';
+import 'package:adir_web_app/pages/questions_page/questions_page.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/description_widget.dart';
 import 'package:adir_web_app/pages/questions_page/widgets/hello_im_lisa_widget.dart';
 import 'package:adir_web_app/utils/dialog_utils.dart';
 import 'package:adir_web_app/utils/phone_field_controller.dart';
+import 'package:adir_web_app/utils/prefs_data.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_html/html.dart';
+import 'package:universal_html/html.dart' as html;
 
 part 'login_page_design_logic.dart';
 part 'login_page_logic.dart';
@@ -43,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.all(20.0),
         child: Center(
           child: Container(
-            constraints: BoxConstraints(maxWidth: 500),
+            constraints: const BoxConstraints(maxWidth: 500),
             child: Form(
               key: _formKey,
               child: Column(
@@ -93,6 +97,9 @@ class _LoginPageState extends State<LoginPage> {
                                   keyboardType: TextInputType.phone,
                                   style: const TextStyle(color: Colors.black),
                                   cursorHeight: 20,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly,
+                                  ],
                                   cursorColor: Theme.of(context).primaryColor,
                                   onChanged: onMobileTextChange,
                                   onEditingComplete: onEditingComplete,
@@ -147,7 +154,17 @@ class _LoginPageState extends State<LoginPage> {
                         Row(
                           children: [
                             TextButton(
-                              onPressed: () => Navigator.of(context).pop(),
+                              onPressed: () => areInitialAnswersEmpty()
+                                  ? Navigator.pushReplacement(
+                                      context,
+                                      PageRouteBuilder(
+                                          pageBuilder: (context, animation1,
+                                                  animation2) =>
+                                              QuestionsPage(index: 0),
+                                          transitionDuration: Duration.zero,
+                                          reverseTransitionDuration:
+                                              Duration.zero))
+                                  : Navigator.of(context).pop(),
                               child: const Text('Back'),
                             ),
                             const SizedBox(width: 50),

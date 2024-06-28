@@ -5,23 +5,8 @@ extension LoginPageDesignLogic on _LoginPageState {
     setState(() => validPhoneNumber = phoneNumberController.text.isNotEmpty);
 
     if (_formKey.currentState!.validate() && validPhoneNumber == true) {
-      Map<String, dynamic> phoneVerification = {};
-      _verificationId = 1234;
-      phoneVerification['id'] = '1234';
-      phoneVerification['next_request_at'] = '2024-12-12';
-      Navigator.push(
-          context,
-          SlideRoute(
-            page: VerificationPage(
-              phoneNumber: phoneNumberController.getParsedPhoneNumber(),
-              verificationId: _verificationId,
-              phoneVerification: phoneVerification,
-              name: nameController.text,
-            ),
-          ));
       if (validPhoneNumber == true) {
         String device = await getDevice();
-        //TODO uncomment this when api's ready
         Session()
             .loginClient
             .requestSms(
@@ -30,8 +15,7 @@ extension LoginPageDesignLogic on _LoginPageState {
             .then((Map<String, dynamic> phoneVerification) async {
           Navigator.of(context).pop();
           _verificationId = phoneVerification['id'];
-          //_verificationId = 123;
-          //phoneVerification['next_request_at'] = '2024-12-12';
+
           Navigator.push(
               context,
               SlideRoute(
@@ -74,7 +58,8 @@ extension LoginPageDesignLogic on _LoginPageState {
               sharedPreferences.remove('idForVerification');
               if (mounted) {
                 DialogUtils.showErrorDialog(context,
-                    body: const Text('An Error Occurred'), onOk: () {});
+                    body: const Text('An Error Occurred'),
+                    onOk: () => Navigator.of(context).pop());
               }
             }
           } on NoSuchMethodError catch (error, stack) {

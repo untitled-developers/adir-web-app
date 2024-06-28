@@ -29,10 +29,19 @@ extension QuestionsPageLogic on _QuestionsPageState {
       setState(() => showValidationMessage = false);
       if (currentIndex == 0 && currentQuestion['answer'] == 'Other') {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => CaseOthersPage()));
+            context,
+            PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) =>
+                    CaseOthersPage(),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero));
       } else if (currentIndex == 2) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context,
+            PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) => LoginPage(),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero));
       }
       if (currentIndex != 2) currentIndex++;
     }
@@ -43,9 +52,11 @@ extension QuestionsPageLogic on _QuestionsPageState {
             .getFormFinishedPercentage() ==
         100) {
       Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => DonePage()),
-      );
+          context,
+          PageRouteBuilder(
+              pageBuilder: (context, animation1, animation2) => DonePage(),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero));
     } else {
       DialogUtils.showNotifyDialog(
         context,

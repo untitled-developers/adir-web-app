@@ -44,31 +44,42 @@ class _MotorInsurancePageState extends State<MotorInsurancePage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                  'To activate your coverage, simply capture the required photos by clicking on the images below.'),
-              const SizedBox(height: 20),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                ),
-                itemCount: 8,
-                itemBuilder: (context, index) => _buildImageTemplate(index),
+          child: Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width > 500
+                  ? 450
+                  : MediaQuery.of(context).size.width * 0.7,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                      'To activate your coverage, simply capture the required photos by clicking on the images below.'),
+                  const SizedBox(height: 20),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                    ),
+                    itemCount: 8,
+                    itemBuilder: (context, index) => _buildImageTemplate(index),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                      onPressed: () => Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  VerificationDocumentsPage(),
+                              transitionDuration: Duration.zero,
+                              reverseTransitionDuration: Duration.zero)),
+                      child: const Text('Upload'))
+                ],
               ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => VerificationDocumentsPage())),
-                  child: const Text('Upload'))
-            ],
+            ),
           ),
         ),
       ),

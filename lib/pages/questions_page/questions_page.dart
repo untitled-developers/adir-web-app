@@ -124,7 +124,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                       chosenYear: chosenYearOfMake,
                                       enabled: enableSelection,
                                     ),
-                                    const SizedBox(height: 50),
+                                    const SizedBox(height: 20),
                                   ],
                                 )
                               : questionContentWidget(context, currentQuestion,
@@ -139,9 +139,13 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                 () {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CoversInfoWidget()));
+                                  PageRouteBuilder(
+                                      pageBuilder:
+                                          (context, animation1, animation2) =>
+                                              CoversInfoWidget(),
+                                      transitionDuration: Duration.zero,
+                                      reverseTransitionDuration:
+                                          Duration.zero));
                             }),
                           if (showValidationMessage)
                             const Text(
@@ -179,6 +183,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                   ),
                 ),
               ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: footerButtons(context,
             currentIndex == 0 || currentIndex == 1 || currentIndex == 2));
   }

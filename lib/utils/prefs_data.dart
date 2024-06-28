@@ -57,7 +57,6 @@ class PrefsData extends ChangeNotifier {
         }
       }
     });
-
     notifyListeners();
   }
 

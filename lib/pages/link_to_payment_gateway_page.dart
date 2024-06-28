@@ -34,8 +34,13 @@ class LinkToPaymentGatewayPage extends StatelessWidget {
                       foregroundColor: Colors.white),
                   onPressed: () => Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const QuestionsPage(index: 8))),
+                      PageRouteBuilder(
+                          pageBuilder: (context, animation1, animation2) =>
+                              QuestionsPage(
+                                index: 8,
+                              ),
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero)),
                   child: const Text('Proceed my application'),
                 ),
               ],

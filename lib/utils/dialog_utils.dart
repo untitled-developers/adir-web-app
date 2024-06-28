@@ -29,8 +29,9 @@ class DialogUtils {
           return AlertDialog(
             title: title ?? const Text("Alert"),
             content: actions != null
-                ? SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.9,
+                ? Container(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.6),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -43,7 +44,7 @@ class DialogUtils {
                     ),
                   )
                 : SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.9,
+                    //width: MediaQuery.of(context).size.width * 0.9,
                     child: SingleChildScrollView(child: body)),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),

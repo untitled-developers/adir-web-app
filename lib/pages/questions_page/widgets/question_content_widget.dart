@@ -52,6 +52,7 @@ Widget questionContentWidget(
     } else if (question['value'] == 'double') {
       return textField(
           label: 'Enter Value',
+          isDigitsOnly: true,
           controller: controller!,
           onChanged: (value) {
             question['answer'] = double.tryParse(value) ?? '';
@@ -96,16 +97,14 @@ Widget questionContentWidget(
             }
           });
     } else if (question['value'] == 'int') {
-      return TextFormField(
-        decoration: const InputDecoration(labelText: 'Enter value'),
-        keyboardType: TextInputType.number,
-        controller: controller,
-        // onChanged: (value) {
-        //   setState(() {
-        //     question['answer'] = int.tryParse(value) ?? '';
-        //   });
-        // }
-      );
+      return textField(
+          label: 'Enter Value',
+          isDigitsOnly: true,
+          controller: controller!,
+          onChanged: (value) {
+            question['answer'] = int.tryParse(value) ?? '';
+          },
+          inputType: TextInputType.number);
     } else if (question['value'] == 'string') {
       return SizedBox(
         width: MediaQuery.of(context).size.width * 0.8,

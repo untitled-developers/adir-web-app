@@ -12,8 +12,13 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
     submitQuestions();
 
     if (currentIndex == 7 && currentQuestion['answer'] == 'Fresh Card') {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => LinkToPaymentGatewayPage()));
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+              pageBuilder: (context, animation1, animation2) =>
+                  LinkToPaymentGatewayPage(),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero));
     } else if (currentIndex == 8) {
       RegExp emailValid = RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -42,7 +47,8 @@ extension QuestionsPageDesignLogic on _QuestionsPageState {
   }
 
   void _previousQuestion() {
-    setState(() => enableSelection = true);
+    showValidationMessage = false;
+
     setState(() {
       if (currentIndex > 0) {
         currentIndex--;

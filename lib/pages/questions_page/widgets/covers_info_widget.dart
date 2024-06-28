@@ -152,8 +152,19 @@ class CoversInfoWidget extends StatelessWidget {
                       style: TextButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColor,
                           foregroundColor: Colors.white),
-                      onPressed: () { Navigator.pop(context);
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> QuestionsPage(index: 4)));},
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation1, animation2) =>
+                                        QuestionsPage(
+                                          index: 4,
+                                        ),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero));
+                      },
                       child: const Text('Next'),
                     ),
                   ],

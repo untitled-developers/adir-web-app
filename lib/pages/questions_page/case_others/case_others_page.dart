@@ -121,9 +121,15 @@ class _CaseOthersPageState extends State<CaseOthersPage> {
             TextButton(
                 onPressed: () {
                   if (nameController.text.isNotEmpty &&
-                      validPhoneNumber == true)
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => DonePage()));
+                      validPhoneNumber == true) {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) =>
+                                const DonePage(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero));
+                  }
                 },
                 child: Text('Save'))
           ],

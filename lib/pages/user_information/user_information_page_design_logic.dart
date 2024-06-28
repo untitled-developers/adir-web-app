@@ -76,9 +76,17 @@ extension UserInformationPageDesignLogic on _UserInformationPageState {
       // });
     }
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => QuestionsPage()));
+        context,
+        PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => QuestionsPage(),
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero));
   }
 
   onProceed() => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => QuestionsPage()));
+      context,
+      PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) => QuestionsPage(),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero));
 }

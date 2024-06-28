@@ -60,8 +60,11 @@ class _DonePageState extends State<DonePage> {
                   TextButton(
                     onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => MotorInsurancePage())),
+                        PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) =>
+                                MotorInsurancePage(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero)),
                     child: Text('Proceed to Motor Insurance Page'),
                   )
                 ],

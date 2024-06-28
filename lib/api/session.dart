@@ -55,7 +55,10 @@ class Session {
       Session().password = null;
       if (context.mounted) {
         Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => LoginPage()),
+            PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) => LoginPage(),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero),
             (Route<dynamic> route) => false);
         storage.delete(key: 'accessToken');
         _loggedInUser = null;
