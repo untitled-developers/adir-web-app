@@ -76,115 +76,127 @@ class _QuestionsPageState extends State<QuestionsPage> {
     }
     fillControllerText();
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Description of the Risk (Demo)'),
-        ),
-        body: isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Center(
-                  child: Container(
-                    constraints: BoxConstraints(maxWidth: 500),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          helloImLisaWidget(),
-                          descriptionWidget(context, currentIndex),
-                          const SizedBox(height: 50),
-                          Text(
-                            currentQuestion['languages']['EN'],
-                            style: const TextStyle(fontSize: 24),
-                          ),
-                          const SizedBox(height: 20),
-                          currentQuestionKey == 'registrationnumber'
-                              ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    questionContentWidget(
-                                      context,
-                                      currentQuestion,
-                                      controller: currentController,
-                                      chosenYear: chosenYearOfMake,
-                                      enabled: enableSelection,
-                                    ),
-                                    const SizedBox(height: 50),
-                                    Text(
-                                      nextQuestion['languages']['EN'],
-                                      style: const TextStyle(fontSize: 24),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    questionContentWidget(
-                                      context,
-                                      nextQuestion,
-                                      controller: nextController,
-                                      chosenYear: chosenYearOfMake,
-                                      enabled: enableSelection,
-                                    ),
-                                    const SizedBox(height: 20),
-                                  ],
-                                )
-                              : questionContentWidget(context, currentQuestion,
-                                  controller: currentController,
-                                  chosenYear: chosenYearOfMake,
-                                  key: currentQuestionKey,
-                                  enabled: enableSelection),
-                          const SizedBox(height: 20),
-                          if (currentQuestionKey == 'insurancetype')
-                            footerWidget(context,
-                                'Do you want to know more about the covers & benefits of each option?',
-                                () {
-                              Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                      pageBuilder:
-                                          (context, animation1, animation2) =>
-                                              CoversInfoWidget(),
-                                      transitionDuration: Duration.zero,
-                                      reverseTransitionDuration:
-                                          Duration.zero));
-                            }),
-                          if (showValidationMessage)
-                            const Text(
-                              'This question is required.',
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          const SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Row(
-                                children: [
-                                  if (currentIndex != 0 && currentIndex != 3)
-                                    TextButton(
-                                      onPressed: _previousQuestion,
-                                      child: const Text('Back'),
-                                    ),
-                                  const SizedBox(width: 50),
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                        backgroundColor:
-                                            Theme.of(context).primaryColor,
-                                        foregroundColor: Colors.white),
-                                    onPressed: _nextQuestion,
-                                    child: const Text('Next'),
+      appBar: AppBar(
+        title: const Text('Description of the Risk (Demo)'),
+      ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: Container(
+                          constraints: BoxConstraints(maxWidth: 500),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                helloImLisaWidget(),
+                                descriptionWidget(context, currentIndex),
+                                const SizedBox(height: 50),
+                                Text(
+                                  currentQuestion['languages']['EN'],
+                                  style: const TextStyle(fontSize: 24),
+                                ),
+                                const SizedBox(height: 20),
+                                currentQuestionKey == 'registrationnumber'
+                                    ? Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          questionContentWidget(
+                                            context,
+                                            currentQuestion,
+                                            controller: currentController,
+                                            chosenYear: chosenYearOfMake,
+                                            enabled: enableSelection,
+                                          ),
+                                          const SizedBox(height: 50),
+                                          Text(
+                                            nextQuestion['languages']['EN'],
+                                            style:
+                                                const TextStyle(fontSize: 24),
+                                          ),
+                                          const SizedBox(height: 20),
+                                          questionContentWidget(
+                                            context,
+                                            nextQuestion,
+                                            controller: nextController,
+                                            chosenYear: chosenYearOfMake,
+                                            enabled: enableSelection,
+                                          ),
+                                          const SizedBox(height: 20),
+                                        ],
+                                      )
+                                    : questionContentWidget(
+                                        context, currentQuestion,
+                                        controller: currentController,
+                                        chosenYear: chosenYearOfMake,
+                                        key: currentQuestionKey,
+                                        enabled: enableSelection),
+                                const SizedBox(height: 20),
+                                if (currentQuestionKey == 'insurancetype')
+                                  footerWidget(context,
+                                      'Do you want to know more about the covers & benefits of each option?',
+                                      () {
+                                    Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                            pageBuilder: (context, animation1,
+                                                    animation2) =>
+                                                CoversInfoWidget(),
+                                            transitionDuration: Duration.zero,
+                                            reverseTransitionDuration:
+                                                Duration.zero));
+                                  }),
+                                if (showValidationMessage)
+                                  const Text(
+                                    'This question is required.',
+                                    style: TextStyle(color: Colors.red),
                                   ),
-                                ],
-                              ),
-                            ],
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: <Widget>[
+                                    Row(
+                                      children: [
+                                        if (currentIndex != 0 &&
+                                            currentIndex != 3)
+                                          TextButton(
+                                            onPressed: _previousQuestion,
+                                            child: const Text('Back'),
+                                          ),
+                                        const SizedBox(width: 50),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                              backgroundColor: Theme.of(context)
+                                                  .primaryColor,
+                                              foregroundColor: Colors.white),
+                                          onPressed: _nextQuestion,
+                                          child: const Text('Next'),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                // const SizedBox(height: 50),
+                              ],
+                            ),
                           ),
-                          const SizedBox(height: 50),
-                        ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: footerButtons(context,
-            currentIndex == 0 || currentIndex == 1 || currentIndex == 2));
+                footerButtons(context,
+                    currentIndex == 0 || currentIndex == 1 || currentIndex == 2)
+              ],
+            ),
+    );
   }
 }
