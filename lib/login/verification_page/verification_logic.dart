@@ -110,47 +110,72 @@ extension VerificationPageCode on _VerificationPageState {
         if (entry.value['answer'].toString().isNotEmpty &&
             entry.value['answer'] != providerQuestions[entry.key]['answer']) {
           setState(() => isDifferent = true);
-          DialogUtils.showNotifyDialog(
-            context,
-            body: const Text(
-                "We've noticed that you have different answers for the first three initial questions, than the ones submitted before. Do you wish to update yoour answers, or keep the old ones?"),
-            actions: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Row(
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Provider.of<PrefsData>(context, listen: false)
-                            .updateQuestions(submittedMap);
-                        Navigator.of(context).pushAndRemoveUntil(
-                            PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation1, animation2) =>
-                                        QuestionsPage(
-                                          index: 3,
-                                        ),
-                                transitionDuration: Duration.zero,
-                                reverseTransitionDuration: Duration.zero),
-                            (Route<dynamic> route) => false);
-                      },
-                      child: const Text('Keep my old answers',
-                          style: TextStyle(fontSize: 12)),
-                    ),
-                    const SizedBox(width: 10),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor: Theme.of(context).primaryColor,
-                          foregroundColor: Colors.white),
-                      onPressed: () => onUpdateAnswers(submittedMap),
-                      child: const Text('Update my answers',
-                          style: TextStyle(fontSize: 12)),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
+          DialogUtils.showNotifyDialog(context,
+              body: const Text(
+                  "We've noticed that you have different answers for the first three initial questions, than the ones submitted before. Do you wish to update yoour answers, or keep the old ones?"),
+              actions: MediaQuery.of(context).size.width > 400
+                  ? Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Provider.of<PrefsData>(context, listen: false)
+                                .updateQuestions(submittedMap);
+                            Navigator.of(context).pushAndRemoveUntil(
+                                PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            QuestionsPage(
+                                              index: 3,
+                                            ),
+                                    transitionDuration: Duration.zero,
+                                    reverseTransitionDuration: Duration.zero),
+                                (Route<dynamic> route) => false);
+                          },
+                          child: const Text('Keep my old answers',
+                              style: TextStyle(fontSize: 12)),
+                        ),
+                        const SizedBox(width: 10),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              foregroundColor: Colors.white),
+                          onPressed: () => onUpdateAnswers(submittedMap),
+                          child: const Text('Update my answers',
+                              style: TextStyle(fontSize: 12)),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Provider.of<PrefsData>(context, listen: false)
+                                .updateQuestions(submittedMap);
+                            Navigator.of(context).pushAndRemoveUntil(
+                                PageRouteBuilder(
+                                    pageBuilder:
+                                        (context, animation1, animation2) =>
+                                            QuestionsPage(
+                                              index: 3,
+                                            ),
+                                    transitionDuration: Duration.zero,
+                                    reverseTransitionDuration: Duration.zero),
+                                (Route<dynamic> route) => false);
+                          },
+                          child: const Text('Keep my old answers',
+                              style: TextStyle(fontSize: 12)),
+                        ),
+                        const SizedBox(height: 10),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              foregroundColor: Colors.white),
+                          onPressed: () => onUpdateAnswers(submittedMap),
+                          child: const Text('Update my answers',
+                              style: TextStyle(fontSize: 12)),
+                        ),
+                      ],
+                    ));
         }
       }
     });
