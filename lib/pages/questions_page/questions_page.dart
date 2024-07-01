@@ -76,9 +76,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
     }
     fillControllerText();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Description of the Risk (Demo)'),
-      ),
+      backgroundColor: Color.fromRGBO(159, 129, 187, 1),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
@@ -96,6 +94,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
+                                const SizedBox(height: 150),
                                 helloImLisaWidget(),
                                 descriptionWidget(context, currentIndex),
                                 const SizedBox(height: 50),
@@ -114,7 +113,6 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                             currentQuestion,
                                             controller: currentController,
                                             chosenYear: chosenYearOfMake,
-                                            enabled: enableSelection,
                                           ),
                                           const SizedBox(height: 50),
                                           Text(
@@ -128,7 +126,6 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                             nextQuestion,
                                             controller: nextController,
                                             chosenYear: chosenYearOfMake,
-                                            enabled: enableSelection,
                                           ),
                                           const SizedBox(height: 20),
                                         ],
@@ -137,8 +134,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                         context, currentQuestion,
                                         controller: currentController,
                                         chosenYear: chosenYearOfMake,
-                                        key: currentQuestionKey,
-                                        enabled: enableSelection),
+                                        key: currentQuestionKey),
                                 const SizedBox(height: 20),
                                 if (currentQuestionKey == 'insurancetype')
                                   footerWidget(context,
@@ -168,15 +164,16 @@ class _QuestionsPageState extends State<QuestionsPage> {
                                         if (currentIndex != 0 &&
                                             currentIndex != 3)
                                           TextButton(
+                                            style: TextButton.styleFrom(
+                                                foregroundColor: Colors.black),
                                             onPressed: _previousQuestion,
                                             child: const Text('Back'),
                                           ),
                                         const SizedBox(width: 50),
                                         TextButton(
                                           style: TextButton.styleFrom(
-                                              backgroundColor: Theme.of(context)
-                                                  .primaryColor,
-                                              foregroundColor: Colors.white),
+                                              backgroundColor: Colors.yellow,
+                                              foregroundColor: Colors.black),
                                           onPressed: _nextQuestion,
                                           child: const Text('Next'),
                                         ),

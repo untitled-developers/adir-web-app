@@ -18,11 +18,9 @@ Widget footerButtons(BuildContext context, bool showContinueYourJourney) {
                   .updateAnswer('yearofmake', '');
               Navigator.push(
                   context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation1, animation2) =>
-                          LoginPage(),
-                      transitionDuration: Duration.zero,
-                      reverseTransitionDuration: Duration.zero));
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(),
+                  ));
             },
             child: Text('Continue Your Journey')),
       TextButton(onPressed: () {}, child: Text('Contact Us')),
